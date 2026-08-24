@@ -2,20 +2,33 @@
 import { LoadingGridHero } from "@/components/loaders/hoteldetails/GridHero";
 import { LoadingRoomDetailsContent } from "@/components/loaders/hoteldetails/RoomDetailsContent";
 import { Button } from "@/components/ui/button";
+import { RegistrationReminderBlock } from "@/components/ui/registrationReminderblock";
 import { AmenityIcon } from "@/lib/icons";
 import { RoomType } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { Bell, Check, CircleCheck, Ruler, Star } from "@hugeicons/core-free-icons";
+import {
+  Bell,
+  Check,
+  CircleCheck,
+  Ruler,
+  Star,
+} from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-export const RoomContent = ({ room, isLoading }: { room: RoomType, isLoading: boolean }) => {
+export const RoomContent = ({
+  room,
+  isLoading,
+}: {
+  room: RoomType;
+  isLoading: boolean;
+}) => {
   const pathname = usePathname();
 
   if (isLoading) {
-    return <LoadingRoomDetailsContent />
+    return <LoadingRoomDetailsContent />;
   }
 
   return (
@@ -40,14 +53,14 @@ export const RoomContent = ({ room, isLoading }: { room: RoomType, isLoading: bo
           <span className="text-3xl font-bold">{room.name}</span>
           <div className="flex gap-6 items-center">
             <div className="flex gap-2 items-center">
-
               <div className="flex flex-col text-end">
                 <span className="text-muted-foreground text-[10px]">
                   TOTAL AREA
                 </span>
                 <div className="flex items-center gap-2">
                   <HugeiconsIcon
-                    icon={Ruler} size={14}
+                    icon={Ruler}
+                    size={14}
                     className="text-primary font-bold"
                   />
                   <span className="font-bold text-xl">
@@ -61,10 +74,7 @@ export const RoomContent = ({ room, isLoading }: { room: RoomType, isLoading: bo
         <div className="flex flex-col gap-2">
           <span className="font-bold text-2xl">Room Overview</span>
           <div className="flex flex-col text-[14px] text-muted-foreground gap-4">
-            <p>
-              {room.description}
-            </p>
-
+            <p>{room.description}</p>
           </div>
         </div>
         <div className="p-6 bg-bg-mute/50 rounded-2xl flex flex-col">
@@ -75,9 +85,7 @@ export const RoomContent = ({ room, isLoading }: { room: RoomType, isLoading: bo
                 <div className="size-10 bg-bg-mute rounded-full flex items-center justify-center">
                   <HugeiconsIcon icon={CircleCheck} className="text-primary" />
                 </div>
-                <span className="text-xs text-muted-foreground">
-                  {amenity}
-                </span>
+                <span className="text-xs text-muted-foreground">{amenity}</span>
               </div>
             ))}
           </div>
@@ -128,14 +136,8 @@ export const RoomContent = ({ room, isLoading }: { room: RoomType, isLoading: bo
             </Link>
           </div>
         </div>
-        <div className="p-6 flex text-center rounded-2xl flex-col gap-2 border items-center justify-center border-primary bg-primary/10">
-          <p className="text-xs">
-            Register and earn free tokens on each transaction
-          </p>
-          <Button className={"w-full p-4"}>Register Now</Button>
-        </div>
+        <RegistrationReminderBlock />
       </div>
     </section>
-
   );
 };

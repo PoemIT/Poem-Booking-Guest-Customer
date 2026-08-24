@@ -1,6 +1,9 @@
 import { LoadingRoomDetailsContent } from "@/components/loaders/hoteldetails/RoomDetailsContent";
+import MapView from "@/components/MapView";
+
 import { Button } from "@/components/ui/button";
 import { DatePickerDemo } from "@/components/ui/date-picker";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { RegistrationReminderBlock } from "@/components/ui/registrationReminderblock";
 import { Apartment, ApartmentReview } from "@/lib/types";
@@ -39,6 +42,10 @@ export const AppartmentDetailsContent = ({
   loading: Boolean;
   apartment: Apartment;
 }) => {
+  const places = [
+    { id: "1", name: "Bamenda", lat: 5.9631, lng: 10.1591 },
+    { id: "2", name: "Yaoundé", lat: 3.848, lng: 11.5021 },
+  ];
   const amenities = [
     {
       icon: Wifi,
@@ -146,13 +153,36 @@ export const AppartmentDetailsContent = ({
               <span>
                 {apartment.city}, {apartment.region}
               </span>
-              <Button
-                className={
-                  "bg-secondary-foreground text-[10px] hover:bg-secondary-foreground/90"
-                }
-              >
-                VIEW ON MAP
-              </Button>
+              <Dialog>
+                <DialogTrigger
+                  render={
+                    <Button
+                      className={
+                        "bg-secondary-foreground text-[10px] hover:bg-secondary-foreground/90"
+                      }
+                    >
+                      VIEW ON MAP
+                    </Button>
+                  }
+                />
+                <DialogContent
+                  className={"h-fit min-w-[500px] flex flex-col mt-4"}
+                >
+                  <div className="relative w-fit ">
+                    <MapView
+                      lat={
+                        3.848
+                        // apartment.location.latitude
+                      }
+                      lng={
+                        11.5021
+                        // apartment.location.latitude
+                      }
+                      label={apartment.name}
+                    />
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
 

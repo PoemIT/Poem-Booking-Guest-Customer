@@ -4,8 +4,10 @@ import { Button } from "../ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft, ArrowRight } from "@hugeicons/core-free-icons";
 import Image from "next/image";
+import { apartments } from "@/lib/data";
+import { Apartment } from "@/lib/types";
 
-const FeaturedAppartmentCard = () => {
+const FeaturedAppartmentCard = ({ apartment }: { apartment: Apartment }) => {
   return (
     <div className="flex flex-col gap-4 h-90">
       <div className="flex flex-1 rounded-2xl overflow-hidden relative">
@@ -13,26 +15,33 @@ const FeaturedAppartmentCard = () => {
           New
         </span>
         <Image
-          src={"/default.png"}
+          src={apartment.image}
           className="h-full w-full object-cover"
           width={300}
           height={300}
-          alt="app"
+          alt={`${apartment.name} image`}
         />
       </div>
       <div className="flex flex-col gap-1.5">
-        <span className="font-bold">The Akwa Heights Executive</span>
+        <span className="font-bold">{apartment.name}</span>
         <div className="flex flex-col gap-1.5 text-[14px] text-muted-foreground ">
-          <span>Akwa, Douala</span>
-          <span>2 BR • Laundry • High-Speed</span>
+          <span>
+            {apartment.city}, {apartment.region}
+          </span>
+          <span>{apartment.bedrooms} BR • Laundry • High-Speed</span>
         </div>
-        <span className="font-bold">Starting from 85,000 XAF</span>
+        <span className="font-bold">
+          Starting from {apartment.formattedPrice}
+        </span>
       </div>
     </div>
   );
 };
 
 export const FeaturedAppartments = () => {
+  const featuredApartments = apartments.filter(
+    (apartment) => apartment.featured,
+  );
   return (
     <section className="container-x flex flex-col gap-6">
       <div className="flex flex-col gap-1.5">
@@ -45,7 +54,7 @@ export const FeaturedAppartments = () => {
               prestigious neighborhoods.
             </p>
           </div>
-          <Link href={"/"}>
+          <Link href={"/appartment/all"}>
             <Button variant={"link"}>
               View All <HugeiconsIcon icon={ArrowRight} size={20} />
             </Button>
@@ -53,7 +62,9 @@ export const FeaturedAppartments = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <FeaturedAppartmentCard />
+        {featuredApartments.map((apartment, i) => (
+          <FeaturedAppartmentCard apartment={apartment} key={i} />
+        ))}
       </div>
     </section>
   );

@@ -1,10 +1,6 @@
+"use client";
 import {
   ArrowRight01FreeIcons,
-  Bed,
-  Building01Icon,
-  Bus01FreeIcons,
-  Calendar,
-  DotFreeIcons,
   Location,
   People,
   Search,
@@ -35,11 +31,11 @@ export const HeroMain = () => {
               Curated comfort across the nation from the mist of Mount Cameroon
               to the vibrant street of Douala. Explore Cameroon in one place.
             </p>
-            <Link href={"/hotels/all"}>
+            {/* <Link href={"/hotels/all"}>
               <Button className="p-6 w-40 flex items-center gap-2 ">
                 Explore Hotels <HugeiconsIcon icon={ArrowRight01FreeIcons} />
               </Button>
-            </Link>
+            </Link> */}
           </div>
 
           <div className="w-fit mt-8 shadow-md text-black bg-white rounded-2xl border border-border flex flex-col">

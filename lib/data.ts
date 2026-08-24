@@ -7,7 +7,13 @@ import type {
   HotelReview,
   Restaurant,
 } from "./types";
-import type { RoomCategory, BusRegion } from "./types";
+import type {
+  Apartment,
+  ApartmentReview,
+  GeoLocation,
+  RoomCategory,
+  BusRegion,
+} from "./types";
 
 export const regions = [
   "Far North",
@@ -919,6 +925,29 @@ const additionalHotels: Hotel[] = additionalHotelNames.map(
 
 export const hotels: Hotel[] = [...baseHotels, ...additionalHotels];
 
+const cityLocations: Record<string, GeoLocation> = {
+  Yaounde: { latitude: 3.848, longitude: 11.5021 },
+  Douala: { latitude: 4.0511, longitude: 9.7679 },
+  Kribi: { latitude: 2.9373, longitude: 9.9077 },
+  Buea: { latitude: 4.155, longitude: 9.231 },
+  Garoua: { latitude: 9.3014, longitude: 13.3976 },
+  Limbe: { latitude: 4.0236, longitude: 9.206 },
+  Bamenda: { latitude: 5.9631, longitude: 10.1591 },
+  Foumban: { latitude: 5.7266, longitude: 10.8985 },
+  Nkongsamba: { latitude: 4.9547, longitude: 9.9404 },
+  Edea: { latitude: 3.8, longitude: 10.1333 },
+  Kumba: { latitude: 4.6363, longitude: 9.4469 },
+  Maroua: { latitude: 10.591, longitude: 14.3159 },
+  Bafoussam: { latitude: 5.4781, longitude: 10.4177 },
+};
+
+hotels.forEach((hotel) => {
+  hotel.location ??= cityLocations[hotel.city] ?? {
+    latitude: 5.9631,
+    longitude: 10.1591,
+  };
+});
+
 const threeImageHotels = new Set([
   "blue-pearl-douala",
   "limbe-bay-resort",
@@ -1035,6 +1064,279 @@ hotels.forEach((hotel, hotelIndex) => {
     });
   }
 });
+
+const apartmentImages = [
+  roomImages[0],
+  roomImages[1],
+  roomImages[2],
+  roomImages[3],
+  roomImages[4],
+  roomImages[5],
+  roomImages[6],
+  roomImages[7],
+];
+
+const apartmentReviews = (
+  apartmentId: string,
+  rating: number,
+  message: string,
+): ApartmentReview[] => [
+  {
+    id: `${apartmentId}-review-1`,
+    guestName: "Marc K.",
+    guestInitials: "MK",
+    stayDate: "October 2026",
+    rating,
+    message,
+  },
+  {
+    id: `${apartmentId}-review-2`,
+    guestName: "Nadia T.",
+    guestInitials: "NT",
+    stayDate: "August 2026",
+    rating: Math.max(4, rating - 0.1),
+    message: "A comfortable, central apartment with everything we needed.",
+  },
+];
+
+const baseApartments: Apartment[] = [
+  {
+    id: "palmiers-smart-studio",
+    slug: "palmiers-smart-studio",
+    name: "Palmiers Smart Studio",
+    type: "Studio",
+    description:
+      "A sophisticated urban retreat with automated climate control, high-speed internet, and bespoke furniture.",
+    city: "Douala",
+    region: "Littoral",
+    address: "Cite, Douala",
+    location: { latitude: 4.0511, longitude: 9.7679 },
+    rating: 4.9,
+    reviewCount: 84,
+    image: apartmentImages[0],
+    images: [
+      apartmentImages[0],
+      apartmentImages[1],
+      apartmentImages[2],
+      apartmentImages[3],
+    ],
+    price: 55000,
+    currency: "XAF",
+    bedrooms: 1,
+    bathrooms: 1,
+    capacity: 2,
+    size: 42,
+    amenities: [
+      "High-speed WiFi",
+      "Smart TV",
+      "Automated climate control",
+      "Workspace",
+    ],
+    reviews: apartmentReviews(
+      "palmiers-smart-studio",
+      5,
+      "Incredible smart features and very central.",
+    ),
+    featured: true,
+  },
+  {
+    id: "akwa-heights-executive",
+    slug: "akwa-heights-executive",
+    name: "Akwa Heights",
+    type: "Executive",
+    description:
+      "A polished executive apartment with a generous lounge and an easy downtown address.",
+    city: "Douala",
+    region: "Littoral",
+    address: "Akwa, Douala",
+    location: { latitude: 4.0511, longitude: 9.7679 },
+    rating: 4.8,
+    reviewCount: 61,
+    image: apartmentImages[2],
+    images: [
+      apartmentImages[2],
+      apartmentImages[3],
+      apartmentImages[4],
+      apartmentImages[5],
+    ],
+    price: 85000,
+    currency: "XAF",
+    bedrooms: 2,
+    bathrooms: 2,
+    capacity: 4,
+    size: 76,
+    amenities: ["WiFi", "Smart TV", "Fully equipped kitchen", "Secure parking"],
+    reviews: apartmentReviews(
+      "akwa-heights-executive",
+      4.8,
+      "Spacious, quiet, and perfectly located for work.",
+    ),
+    featured: true,
+  },
+  {
+    id: "bastos-garden-residence",
+    slug: "bastos-garden-residence",
+    name: "Bastos Garden Residence",
+    type: "Family",
+    description:
+      "A bright family apartment with a leafy terrace and room to settle in for longer stays.",
+    city: "Yaounde",
+    region: "Central",
+    address: "Bastos, Yaounde",
+    location: { latitude: 3.882, longitude: 11.516 },
+    rating: 4.7,
+    reviewCount: 48,
+    image: apartmentImages[4],
+    images: [
+      apartmentImages[4],
+      apartmentImages[5],
+      apartmentImages[6],
+      apartmentImages[7],
+    ],
+    price: 95000,
+    currency: "XAF",
+    bedrooms: 3,
+    bathrooms: 2,
+    capacity: 6,
+    size: 110,
+    amenities: ["Garden terrace", "WiFi", "Laundry", "Family dining area"],
+    reviews: apartmentReviews(
+      "bastos-garden-residence",
+      4.7,
+      "The apartment felt like a calm home in the city.",
+    ),
+  },
+  {
+    id: "kribi-ocean-penthouse",
+    slug: "kribi-ocean-penthouse",
+    name: "Kribi Ocean Penthouse",
+    type: "Penthouse",
+    description:
+      "A breezy coastal penthouse with an open living area and wide Atlantic views.",
+    city: "Kribi",
+    region: "South",
+    address: "Boulevard de la Plage, Kribi",
+    location: { latitude: 2.9373, longitude: 9.9077 },
+    rating: 4.9,
+    reviewCount: 73,
+    image: apartmentImages[6],
+    images: [
+      apartmentImages[6],
+      apartmentImages[7],
+      apartmentImages[0],
+      apartmentImages[1],
+    ],
+    price: 145000,
+    currency: "XAF",
+    bedrooms: 3,
+    bathrooms: 3,
+    capacity: 6,
+    size: 138,
+    amenities: ["Ocean terrace", "Private pool", "WiFi", "Chef kitchen"],
+    reviews: apartmentReviews(
+      "kribi-ocean-penthouse",
+      4.9,
+      "The ocean view and spacious terrace were unforgettable.",
+    ),
+    featured: true,
+  },
+];
+
+const additionalApartmentDetails = [
+  [
+    "Bonapriso Garden Villa",
+    "Douala",
+    "Littoral",
+    "Villa",
+    120000,
+    3,
+    3,
+    6,
+    128,
+  ],
+  ["Mvan Comfort Suite", "Yaounde", "Central", "Executive", 70000, 2, 2, 4, 68],
+  ["Buea Highland Studio", "Buea", "South West", "Studio", 48000, 1, 1, 2, 38],
+  ["Limbe Sunset Villa", "Limbe", "South West", "Villa", 135000, 3, 2, 6, 115],
+  [
+    "Foumban Heritage Apartment",
+    "Foumban",
+    "West",
+    "Family",
+    65000,
+    2,
+    2,
+    5,
+    82,
+  ],
+  [
+    "Bamenda View Penthouse",
+    "Bamenda",
+    "North West",
+    "Penthouse",
+    155000,
+    3,
+    3,
+    6,
+    142,
+  ],
+] as const;
+
+const additionalApartments: Apartment[] = additionalApartmentDetails.map(
+  (
+    [name, city, region, type, price, bedrooms, bathrooms, capacity, size],
+    index,
+  ) => {
+    const id = name.toLowerCase().replaceAll(" ", "-");
+    const location = cityLocations[city] ?? cityLocations.Yaounde;
+    const images = [
+      apartmentImages[(index + 1) % apartmentImages.length],
+      apartmentImages[(index + 2) % apartmentImages.length],
+      apartmentImages[(index + 3) % apartmentImages.length],
+      apartmentImages[(index + 4) % apartmentImages.length],
+    ];
+
+    return {
+      id,
+      slug: id,
+      name,
+      type,
+      description: `A thoughtfully furnished ${type.toLowerCase()} apartment in ${city}, designed for comfortable business and leisure stays.`,
+      city,
+      region,
+      address: `${city} Central District, Cameroon`,
+      location,
+      rating: Number((4.5 + (index % 5) / 10).toFixed(1)),
+      reviewCount: 35 + index * 11,
+      image: images[0],
+      images,
+      price,
+      currency: "XAF",
+      bedrooms,
+      bathrooms,
+      capacity,
+      size,
+      amenities: [
+        "WiFi",
+        "Smart TV",
+        "Fully equipped kitchen",
+        "Secure parking",
+      ],
+      reviews: apartmentReviews(
+        id,
+        Number((4.5 + (index % 5) / 10).toFixed(1)),
+        "A comfortable apartment with a convenient location.",
+      ),
+      featured: index % 3 === 0,
+    };
+  },
+);
+
+export const apartments: Apartment[] = [
+  ...baseApartments,
+  ...additionalApartments,
+];
+
+export const appartments = apartments;
 
 hotelCollections.forEach((collection) => {
   collection.hotelIds.push(
@@ -2100,6 +2402,10 @@ hotels.forEach((hotel) => {
   hotel.rooms.forEach((room) => {
     room.formattedPrice = formatPrice(room.price);
   });
+});
+
+apartments.forEach((apartment) => {
+  apartment.formattedPrice = formatPrice(apartment.price, apartment.currency);
 });
 
 busRoutes.forEach((route) => {

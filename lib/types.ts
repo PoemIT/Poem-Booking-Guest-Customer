@@ -13,6 +13,46 @@ export type HotelReview = {
   message: string;
 };
 
+export type GeoLocation = {
+  latitude: number;
+  longitude: number;
+};
+
+export type ApartmentReview = {
+  id: string;
+  guestName: string;
+  guestInitials: string;
+  stayDate: string;
+  rating: number;
+  message: string;
+};
+
+export type Apartment = {
+  id: string;
+  slug: string;
+  name: string;
+  type: "Studio" | "Executive" | "Family" | "Penthouse" | "Villa";
+  description: string;
+  city: string;
+  region: string;
+  address: string;
+  location: GeoLocation;
+  rating: number;
+  reviewCount: number;
+  image: string;
+  images: string[];
+  price: number;
+  formattedPrice?: string;
+  currency: "XAF";
+  bedrooms: number;
+  bathrooms: number;
+  capacity: number;
+  size: number;
+  amenities: string[];
+  reviews: ApartmentReview[];
+  featured?: boolean;
+};
+
 export type RoomCategory =
   | "Standard"
   | "Deluxe"
@@ -58,6 +98,7 @@ export type Hotel = {
   city: string;
   region: string;
   address: string;
+  location?: GeoLocation;
   rating: number;
   reviewCount: number;
   image: string;

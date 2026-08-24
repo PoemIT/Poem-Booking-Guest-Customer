@@ -24,11 +24,11 @@ export const HomeNavbar = () => {
       link: "/hotels",
       key: "hotels",
     },
-    // {
-    //   label: "Appartments",
-    //   link: "/appartments",
-    //   key: "appartments",
-    // },
+    {
+      label: "Appartments",
+      link: "/appartment",
+      key: "appartment",
+    },
     {
       label: "Buses",
       link: "/buses",

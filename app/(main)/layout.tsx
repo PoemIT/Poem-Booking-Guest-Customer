@@ -5,7 +5,6 @@ import { HomeNavbar } from "@/components/ui/home_nav";
 import { Footer } from "@/components/home/Footer";
 import { Toaster } from "@/components/ui/sonner";
 
-
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
@@ -29,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
+    <main
       lang="en"
       className={cn(
         "h-full",
@@ -40,12 +39,12 @@ export default function RootLayout({
         inter.variable,
       )}
     >
-      <body className="min-h-full bg-background flex flex-col">
+      <div className="min-h-full bg-background flex flex-col">
         <HomeNavbar />
         <Toaster />
         {children}
         <Footer />
-      </body>
-    </html>
+      </div>
+    </main>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+import { EmptyApartments } from "@/components/emptystuff";
 import { ApartmentLoading } from "@/components/loaders/appartment/ApartmentLoading";
 import { Button } from "@/components/ui/button";
 import { apartments } from "@/lib/data";
@@ -55,7 +56,13 @@ const AppartmentCard = ({ apartment }: { apartment: Apartment }) => {
   );
 };
 
-export const AllAppartmentContent = ({ loading }: { loading: boolean }) => {
+export const AllAppartmentContent = ({
+  loading,
+  Apartments,
+}: {
+  loading: boolean;
+  Apartments: Apartment[];
+}) => {
   if (loading) {
     return (
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
@@ -65,9 +72,18 @@ export const AllAppartmentContent = ({ loading }: { loading: boolean }) => {
       </div>
     );
   }
+
+  if (Apartments.length === 0) {
+    return (
+      <div>
+        <EmptyApartments />
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
-      {apartments.map((ap, i) => (
+      {Apartments.map((ap, i) => (
         <AppartmentCard key={i} apartment={ap} />
       ))}
     </div>

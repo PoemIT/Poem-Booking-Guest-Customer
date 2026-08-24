@@ -9,6 +9,7 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   AlertTriangle,
+  Bed,
   BusFront,
   NoMeetingRoomIcon,
 } from "@hugeicons/core-free-icons";
@@ -42,6 +43,25 @@ export const EmptyBusRoutes = () => {
           <EmptyTitle>Bus route not found</EmptyTitle>
           <EmptyDescription>
             There are no available bus routes with your defined specification.
+          </EmptyDescription>
+        </EmptyHeader>
+      </Empty>
+    </div>
+  );
+};
+
+export const EmptyApartments = () => {
+  return (
+    <div className="mt-[20px]">
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <HugeiconsIcon icon={Bed} size={40} />
+          </EmptyMedia>
+          <EmptyTitle>No Apartments Found</EmptyTitle>
+          <EmptyDescription>
+            There are no available apartments routes with your defined
+            specification.
           </EmptyDescription>
         </EmptyHeader>
       </Empty>

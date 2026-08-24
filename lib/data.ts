@@ -2434,6 +2434,10 @@ export const restaurantCategories = Array.from(
   new Set(restaurants.flatMap((restaurant) => restaurant.categories)),
 );
 
+export const apartmentTypes = Array.from(
+  new Set(apartments.flatMap((apartment) => apartment.type)),
+);
+
 export const dishes = restaurants.flatMap((restaurant) => restaurant.dishes);
 
 export const cameroonCities = [
@@ -2469,4 +2473,11 @@ export const cameroonCities = [
   "Sangmélima",
   "Obala",
   "Akonolinga",
+];
+
+export const ApartmentPriceRanges = [
+  "under-50000",
+  "50000-100000",
+  "100000-150000",
+  "over-150000",
 ];

@@ -1,19 +1,27 @@
+"use client";
 import {
   ArrowRight,
   ArrowRight01FreeIcons,
   Bed,
+  Box,
   Building01Icon,
   Bus01FreeIcons,
   Calendar,
   Location,
+  Money,
   People,
   Search,
   User,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { regions } from "@/lib/data";
+import {
+  ApartmentPriceRanges,
+  apartmentTypes,
+  cities,
+  regions,
+} from "@/lib/data";
 import {
   Combobox,
   ComboboxContent,
@@ -24,8 +32,23 @@ import {
 } from "../ui/combobox";
 import { DatePickerDemo } from "../ui/date-picker";
 import { Input } from "../ui/input";
+import { ApartmentFilter } from "./all/AllAppartmentBlock";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const AppartmentMainHero = () => {
+  const [filter, setFilter] = useState<ApartmentFilter>({
+    price: "",
+    type: "",
+    city: "",
+  });
+
+  const pathname = usePathname();
+
+  const UpdateFilter = (key: keyof ApartmentFilter, value: string) => {
+    setFilter((prev) => ({ ...prev, [key]: value }));
+  };
+
   return (
     <section className="w-full flex items-center justify-center text-white h-[calc(600px+var(--nav-height))] bg-[url('/default.png')] bg-cover relative">
       <div className="absolute inset-0 bg-black/40">
@@ -43,12 +66,16 @@ export const AppartmentMainHero = () => {
               <div className="flex flex-col gap-1">
                 <span className="font-bold flex gap-1 items-center">
                   <HugeiconsIcon icon={Location} size={12} />
-                  Location
+                  City
                 </span>
-                <Combobox items={regions}>
+                <Combobox
+                  value={filter.city}
+                  onInputValueChange={(val) => UpdateFilter("city", val)}
+                  items={cities}
+                >
                   <ComboboxInput
                     className={"h-10"}
-                    placeholder="Select an Origin"
+                    placeholder="Select an city"
                   />
                   <ComboboxContent>
                     <ComboboxEmpty>No items found.</ComboboxEmpty>
@@ -64,21 +91,72 @@ export const AppartmentMainHero = () => {
               </div>
               <div className="flex flex-col gap-1">
                 <span className="font-bold flex gap-1 items-center">
-                  <HugeiconsIcon icon={Calendar} size={12} />
-                  Date
+                  <HugeiconsIcon icon={Box} size={12} />
+                  Type
                 </span>
-                <DatePickerDemo className="w-full" />
+                <Combobox
+                  value={filter.type}
+                  onInputValueChange={(value) =>
+                    UpdateFilter("type", value ?? "")
+                  }
+                  items={apartmentTypes}
+                >
+                  <ComboboxInput
+                    className={"h-10"}
+                    placeholder="Select a Type"
+                  />
+                  <ComboboxContent>
+                    <ComboboxEmpty>No items found.</ComboboxEmpty>
+                    <ComboboxList>
+                      {(item) => (
+                        <ComboboxItem key={item} value={item}>
+                          {item.replaceAll("-", " ")}
+                        </ComboboxItem>
+                      )}
+                    </ComboboxList>
+                  </ComboboxContent>
+                </Combobox>
               </div>
               <div className="flex flex-col gap-1">
                 <span className="font-bold flex gap-1 items-center">
-                  <HugeiconsIcon icon={User} size={12} />
-                  Guests
+                  <HugeiconsIcon icon={Money} size={12} />
+                  Price Range
                 </span>
-                <Input className="h-10" placeholder="Guest" type="number" />
+                <Combobox
+                  value={filter.price}
+                  onInputValueChange={(value) =>
+                    UpdateFilter("price", value ?? "")
+                  }
+                  items={ApartmentPriceRanges}
+                >
+                  <ComboboxInput
+                    className={"h-10"}
+                    placeholder="Select a price range"
+                  />
+                  <ComboboxContent>
+                    <ComboboxEmpty>No items found.</ComboboxEmpty>
+                    <ComboboxList>
+                      {(item) => (
+                        <ComboboxItem key={item} value={item}>
+                          {item.replaceAll("-", " ")}
+                        </ComboboxItem>
+                      )}
+                    </ComboboxList>
+                  </ComboboxContent>
+                </Combobox>
               </div>
-              <Button className={" p-5 w-full"}>
-                <HugeiconsIcon icon={Search} size={20} /> Search Appartments
-              </Button>
+              <Link
+                href={`${pathname}/all?city=${filter.city}&price=${filter.price}&type=${filter.type}`}
+              >
+                <Button
+                  disabled={
+                    !filter.city && !filter.price && !filter.type ? true : false
+                  }
+                  className={" p-5 w-full"}
+                >
+                  <HugeiconsIcon icon={Search} size={20} /> Search Appartments
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

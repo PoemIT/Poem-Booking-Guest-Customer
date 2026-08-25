@@ -1,10 +1,26 @@
+import { Skeleton } from "@/components/ui/skeleton";
+import { Restaurant } from "@/lib/types";
 import { Bike, Clock, Star } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import React from "react";
 
-export const RestaurantDetailsHero = () => {
+export const RestaurantDetailsHero = ({
+  restaurant,
+  loading,
+}: {
+  restaurant: Restaurant;
+  loading: boolean;
+}) => {
+  if (loading) {
+    return <Skeleton className="w-full hero" />;
+  }
   return (
-    <div className="hero text-white bg-[url('/default.png')] bg-cover bg-center">
+    <div
+      style={{
+        backgroundImage: `url('${restaurant.image}')`,
+      }}
+      className="hero text-white bg-cover bg-center"
+    >
       <div className="w-full h-full bg-linear-180 from-black/20 to-secondary-foreground">
         <div className="container-x flex flex-col pb-6 gap-6 md:flex-row justify-between h-full items-end">
           <div className="flex flex-col gap-4">
@@ -19,16 +35,17 @@ export const RestaurantDetailsHero = () => {
                     className="text-primary fill-primary"
                     size={12}
                   />
-                  <span>4.9</span>
+                  <span>{restaurant.rating}</span>
                 </span>
-                <span className="opacity-70 px-1">(1.2k+ reviews)</span>
+                <span className="opacity-70 px-1">
+                  ({restaurant.reviewCount} reviews)
+                </span>
               </span>
             </div>
-            <h1 className="text-5xl font-bold">
-              Terango Bistro
-            </h1>
-            <p className="text-muted-foreground text-xs">Modern Senegalese-Cameroonian Fusion
-              XAF XAF XAF</p>
+            <h1 className="text-5xl font-bold">{restaurant.name}</h1>
+            <p className="text-muted-foreground text-xs">
+              Modern Senegalese-Cameroonian Fusion XAF XAF XAF
+            </p>
           </div>
           <div className="flex gap-4">
             <div className="size-30 rounded-md flex-col backdrop-blur-2xl border border-border/15 flex items-center justify-center">

@@ -8,12 +8,16 @@ import {
   Coupon01FreeIcons,
   Minus,
   Plus,
+  Trash,
 } from "@hugeicons/core-free-icons";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { CartItem as Item, useCartStore } from "@/lib/useCart";
+import { EmptyCart } from "../emptystuff";
 
 const CartItem = ({ item }: { item: Item }) => {
+  const { removeItem } = useCartStore();
+
   return (
     <div className="py-4 border-b border-border flex justify-between items-end">
       <div className="flex items-center gap-3">
@@ -30,7 +34,7 @@ const CartItem = ({ item }: { item: Item }) => {
           <div className="flex flex-col gap-1">
             <span className="font-bold">{item.dish.name}</span>
             <span className="text-xs text-muted-foreground">
-              Premium beef, shrimp, and plantains
+              {item.specifications}
             </span>
           </div>
           <span className="font-bold text-primary mt-auto">
@@ -38,14 +42,33 @@ const CartItem = ({ item }: { item: Item }) => {
           </span>
         </div>
       </div>
-      <div className="bg-blue-50 flex p-2 gap-4 rounded-md items-center">
-        <Button size={"icon-sm"} variant={"outline"} className={"border-none"}>
-          <HugeiconsIcon icon={Minus} size={20} />
+      <div className="flex flex-col gap-4 items-end">
+        <Button
+          onClick={() => {
+            removeItem(item.dish.id);
+          }}
+          variant={"outline"}
+          size={"icon-sm"}
+        >
+          <HugeiconsIcon icon={Trash} size={17} />
         </Button>
-        <span>2</span>
-        <Button size={"icon-sm"} variant={"outline"} className={"border-none"}>
-          <HugeiconsIcon icon={Plus} size={20} />
-        </Button>
+        <div className="bg-blue-50 flex p-1 gap-4 rounded-md items-center">
+          <Button
+            size={"icon-sm"}
+            variant={"outline"}
+            className={"border-none"}
+          >
+            <HugeiconsIcon icon={Minus} size={20} />
+          </Button>
+          <span>{item.quantity}</span>
+          <Button
+            size={"icon-sm"}
+            variant={"outline"}
+            className={"border-none"}
+          >
+            <HugeiconsIcon icon={Plus} size={20} />
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -84,9 +107,11 @@ export const CartBlock = () => {
             </span>
           </div>
           <div className="mt-6 flex flex-col">
-            {items.map((item, i) => (
-              <CartItem item={item} key={i} />
-            ))}
+            {items.length === 0 ? (
+              <EmptyCart />
+            ) : (
+              items.map((item, i) => <CartItem item={item} key={i} />)
+            )}
           </div>
         </div>
 

@@ -30,15 +30,11 @@ export const MealCustomisation = ({ dish }: { dish: Dish }) => {
   const { addItem } = useCartStore();
 
   const handleAddtoCart = () => {
-    setMeal((prev) => ({
-      ...prev,
-      price: String(MealPrice * MealData.quantity),
-    }));
     try {
       if (MealData.quantity > 0) {
         addItem(
           MealData.dish,
-          MealData.price,
+          String(MealPrice * MealData.quantity),
           MealData.adons,
           MealData.specifications,
           MealData.quantity,

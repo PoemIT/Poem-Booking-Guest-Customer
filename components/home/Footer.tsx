@@ -57,8 +57,8 @@ export const Footer = () => {
   return (
     <footer className="py-20 mt-20 flex flex-col gap-8 bg-[#e6e2d8]">
       <div className="container-x flex  gap-2 flex-col">
-        <div className="w-full flex border-b border-border justify-between">
-          <div className="flex flex-col gap-6 w-[40%]">
+        <div className="w-full flex flex-col lg:flex-row border-b border-border justify-between">
+          <div className="flex flex-col gap-6 w-full lg:w-[40%]">
             <h2 className="text-2xl font-bold">POEM</h2>
             <p>
               Curated comfort in Cameroon. Your premuim platform for travel and

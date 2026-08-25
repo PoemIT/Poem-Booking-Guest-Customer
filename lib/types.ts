@@ -190,6 +190,8 @@ export type BusRoute = {
   featured?: boolean;
 };
 
+export type adon = { name: string; price: number };
+
 export type Dish = {
   id: string;
   restaurantId: string;
@@ -203,7 +205,7 @@ export type Dish = {
   dietaryTags: string[];
   spicyLevel: "None" | "Mild" | "Medium" | "Hot";
   available: boolean;
-  addOns: { name: string; price: number }[];
+  addOns: adon[];
   formattedPrice?: string;
 };
 

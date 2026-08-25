@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ShoppingCart } from "@hugeicons/core-free-icons";
+import { useCartStore } from "@/lib/useCart";
 
 export const HomeNavbar = () => {
   const pathname = usePathname();
@@ -40,8 +41,10 @@ export const HomeNavbar = () => {
       key: "restaurants",
     },
   ];
+
+  const { items } = useCartStore();
   return (
-    <div className="w-full z-90 fixed top-0 border-b bg-background border-border">
+    <div className="w-full hidden z-90 md:flex fixed top-0 border-b bg-background border-border">
       <div className="container-x h-(--nav-height) flex justify-between gap-2">
         <div className="flex gap-8 items-center">
           <div className="flex gap-2 items-center">
@@ -69,11 +72,14 @@ export const HomeNavbar = () => {
           <Link
             href={"/cart"}
             className={cn(
-              "",
+              "relative",
               pathname === "/cart" ? "text-primary" : "text-muted-foreground",
             )}
           >
             <HugeiconsIcon icon={ShoppingCart} size={20} />
+            <span className="absolute p-1 w-4 h-4 rounded-full -top-2 -right-2 flex items-center justify-center text-[10px] bg-primary/20 text-primary font-bold border border-primary/30">
+              {items.length}
+            </span>
           </Link>
           <Link href={"/account"}>
             <Button

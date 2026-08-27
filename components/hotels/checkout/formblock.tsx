@@ -1,3 +1,4 @@
+import { PaymentMethodSelectionGrid } from "@/components/payments/MethodSelectionGrid";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -88,7 +89,7 @@ export const CheckoutFormBlock = () => {
             </form>
           </div>
           <div className="p-6 bg-bg-mute rounded-2xl flex flex-col gap-6">
-            <span className="flex gap-2 items-center mb-4">
+            <span className="flex gap-2 items-center">
               <div className="size-8 bg-secondary-foreground flex items-center justify-center rounded-md text-white">
                 <HugeiconsIcon
                   icon={Payment01FreeIcons}
@@ -103,7 +104,8 @@ export const CheckoutFormBlock = () => {
                 Select your preferred secure payment provider. All transactions
                 are encrypted.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
+              <PaymentMethodSelectionGrid />
+              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
                 {paymentMethods.map((method, i) => (
                   <div
                     key={i}
@@ -121,7 +123,7 @@ export const CheckoutFormBlock = () => {
                     <Input type="checkbox" className="w-4 h-4 rounded-full" />
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

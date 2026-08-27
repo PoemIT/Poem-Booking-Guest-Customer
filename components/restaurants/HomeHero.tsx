@@ -4,9 +4,18 @@ import React from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "../ui/combobox";
 
 export const RestaurantsHomeHero = () => {
   const feats = ["Cuisines", "Price", "Ratings", "Delivery Time"];
+  const ratings = ["4.5+", "3+", "2+"];
   return (
     <div className="bg-bg-mute/40 mt-[calc(var(--nav-height))] py-30">
       <div className="container-x flex flex-col items-center justify-center gap-4">
@@ -36,7 +45,28 @@ export const RestaurantsHomeHero = () => {
           </Button>
         </div>
         <div className="flex gap-4 mt-2 items-center justify-center">
-          {feats.map((feat, i) => (
+          <Combobox
+            // value={filter.price}
+            // onInputValueChange={(value) => UpdateFilter("price", value ?? "")}
+            items={ratings}
+          >
+            <ComboboxInput
+              className={"h-10 rounded-full max-w-20 bg-white"}
+              placeholder="Rating"
+            />
+            <ComboboxContent>
+              <ComboboxEmpty>No items found.</ComboboxEmpty>
+              <ComboboxList>
+                {(item) => (
+                  <ComboboxItem key={item} value={item}>
+                    {item.replaceAll("-", " ")}
+                  </ComboboxItem>
+                )}
+              </ComboboxList>
+            </ComboboxContent>
+          </Combobox>
+
+          {/* {feats.map((feat, i) => (
             <span
               key={i}
               className={cn(
@@ -46,7 +76,7 @@ export const RestaurantsHomeHero = () => {
             >
               {feat}
             </span>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

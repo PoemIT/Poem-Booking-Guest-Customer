@@ -1,3 +1,6 @@
+import { PaymentProcessingCard } from "@/components/payments/ProcessingCard";
+import { ReviewStates } from "@/components/payments/ReviewSuccessfull";
+import { TransactionStatusCard } from "@/components/payments/TransactionStatus";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PaymentFormLink } from "@/components/ui/paymentformlink";
@@ -99,7 +102,10 @@ export const PaymentinfoBlock = () => {
       <div className="w-full mx-auto items-start max-w-md flex flex-col">
         <PaymentFormLink />
         {/* <MTNBlock /> */}
-        <OrangeBlock />
+        {/* <OrangeBlock /> */}
+        {/* <PaymentProcessingCard /> */}
+        {/* <TransactionStatusCard /> */}
+        <ReviewStates />
       </div>
     </div>
   );

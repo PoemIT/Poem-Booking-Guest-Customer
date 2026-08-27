@@ -14,9 +14,10 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { CartItem as Item, useCartStore } from "@/lib/useCart";
 import { EmptyCart } from "../emptystuff";
+import { PaymentMethodSelectionGrid } from "../payments/MethodSelectionGrid";
 
 const CartItem = ({ item }: { item: Item }) => {
-  const { removeItem } = useCartStore();
+  const { removeItem, increment, decrement } = useCartStore();
 
   return (
     <div className="py-4 border-b border-border flex justify-between items-end">
@@ -54,6 +55,7 @@ const CartItem = ({ item }: { item: Item }) => {
         </Button>
         <div className="bg-blue-50 flex p-1 gap-4 rounded-md items-center">
           <Button
+            onClick={() => decrement(item.dish.id)}
             size={"icon-sm"}
             variant={"outline"}
             className={"border-none"}
@@ -62,6 +64,7 @@ const CartItem = ({ item }: { item: Item }) => {
           </Button>
           <span>{item.quantity}</span>
           <Button
+            onClick={() => increment(item.dish.id)}
             size={"icon-sm"}
             variant={"outline"}
             className={"border-none"}
@@ -93,6 +96,15 @@ const InputField = ({
 
 export const CartBlock = () => {
   const { items } = useCartStore();
+  const itemsPrice = items.reduce((item, red) => item + Number(red.price), 0);
+
+  const deliveryFee = 1000;
+
+  const poempayDiscount = () => {
+    const calc = Number(itemsPrice) * (3 / 100);
+    return calc;
+  };
+
   return (
     <main className="container-x mt-[calc(var(--nav-height)+10px)] gap-6 grid grid-cols-1 md:grid-cols-5">
       <div className="col-span-3 flex flex-col gap-6">
@@ -197,25 +209,7 @@ export const CartBlock = () => {
         {/* paymentoptions */}
         <div className="flex p-6 flex-col rounded-md shadow-md bg-white gap-4">
           <span className="font-bold">Payment Method</span>
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-4 border border-border rounded-md flex flex-col gap-1">
-              <div className="flex items-center gap-1">
-                <div className="size-5 rounded-md">
-                  <Image
-                    src={"/icon/lmomo.png"}
-                    width={100}
-                    height={100}
-                    className="w-full h-full object-cover"
-                    alt="icon"
-                  />
-                </div>
-                <span className="text-[14px]">Mobile Money</span>
-              </div>
-              <span className="text-xs text-muted-foreground">
-                Quick checkout with OM
-              </span>
-            </div>
-          </div>
+          <PaymentMethodSelectionGrid />
         </div>
       </div>
       <div className="bg-white col-span-2 p-6 flex flex-col h-fit rounded-2xl shadow-md">
@@ -223,11 +217,11 @@ export const CartBlock = () => {
         <div className="mt-4 flex flex-col gap-4 pb-6 border-b border-border">
           <div className="flex items-center text-muted-foreground text-xs justify-between">
             <span>Subtotal</span>
-            <span>11,700 FCFA</span>
+            <span>{itemsPrice} FCFA</span>
           </div>
           <div className="flex items-center text-muted-foreground text-xs justify-between">
             <span>Delivery Fee</span>
-            <span>1,200 FCFA</span>
+            <span>{deliveryFee} FCFA</span>
           </div>
           <div className="flex items-center text-green-500 text-xs justify-between">
             <span className="flex items-center gap-1">
@@ -235,13 +229,15 @@ export const CartBlock = () => {
               <HugeiconsIcon icon={Coupon01FreeIcons} size={12} /> PoemPay
               Discount
             </span>
-            <span>- 585 FCFA FCFA</span>
+            <span>- {poempayDiscount()} FCFA</span>
           </div>
         </div>
         <div className="flex justify-between mt-4">
           <span>Total</span>
           <div className="flex flex-col items-end text-end">
-            <span className="text-primary text-xl">12,000 FCFA</span>
+            <span className="text-primary text-xl">
+              {deliveryFee + itemsPrice - poempayDiscount()} FCFA
+            </span>
             <span className="text-xs text-muted-foreground">
               TAXES INCLUDED
             </span>

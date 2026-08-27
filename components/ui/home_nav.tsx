@@ -6,7 +6,10 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ShoppingCart } from "@hugeicons/core-free-icons";
+import {
+  CustomerService01FreeIcons,
+  ShoppingCart,
+} from "@hugeicons/core-free-icons";
 import { useCartStore } from "@/lib/useCart";
 
 export const HomeNavbar = () => {
@@ -69,6 +72,21 @@ export const HomeNavbar = () => {
           </div>
         </div>
         <div className="flex items-center gap-4">
+          <Link
+            href={"/account/support"}
+            className={cn(
+              "relative p-2 rounded-full",
+              pathname === "/account/support"
+                ? " bg-bg-mute"
+                : "text-muted-foreground",
+            )}
+          >
+            <HugeiconsIcon
+              strokeWidth={pathname === "/account/support" ? 2 : 1}
+              icon={CustomerService01FreeIcons}
+              size={20}
+            />
+          </Link>
           <Link
             href={"/cart"}
             className={cn(

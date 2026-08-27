@@ -12,7 +12,6 @@ import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { restaurants } from "@/lib/data";
 import { Restaurant } from "@/lib/types";
 import { LoadingRestaurantCard } from "../loaders/restaurant/LoadingRestaurantCard";
 
@@ -101,8 +100,10 @@ const RestaurantMainCard = ({ restaurant }: { restaurant: Restaurant }) => {
 
 export const RestaurantHomePageContent = ({
   isLoading,
+  restaurants,
 }: {
   isLoading: boolean;
+  restaurants: Restaurant[];
 }) => {
   if (isLoading) {
     return (

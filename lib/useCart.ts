@@ -39,6 +39,15 @@ export const useCartStore = create<CartState>()(
           const existing = state.items.find((item) => item.dish.id === dish.id);
 
           if (existing) {
+            const totalAdonsPrice = existing.adons?.reduce(
+              (sum, addon) => sum + Number(addon.price),
+              0,
+            );
+
+            const MealPrice = totalAdonsPrice
+              ? existing.dish.price + totalAdonsPrice
+              : existing.dish.price;
+
             return {
               items: state.items.map((item) =>
                 item.dish.id === dish.id
@@ -46,7 +55,7 @@ export const useCartStore = create<CartState>()(
                       ...item,
                       adons: adons,
                       specifications: specification,
-                      price: price,
+                      price: String(MealPrice * existing.quantity),
                       quantity: item.quantity + quantity,
                     }
                   : item,
@@ -73,7 +82,10 @@ export const useCartStore = create<CartState>()(
         set((state) => ({
           items: state.items.map((item) =>
             item.dish.id === dishId
-              ? { ...item, quantity: item.quantity + 1 }
+              ? {
+                  ...item,
+                  quantity: item.quantity + 1,
+                }
               : item,
           ),
         }));

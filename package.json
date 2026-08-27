@@ -18,6 +18,7 @@
     "leaflet": "^1.9.4",
     "mapbox-gl": "^3.29.0",
     "maplibre": "0.0.1-security",
+    "motion": "^13.1.1",
     "next": "16.2.12",
     "next-themes": "^0.4.6",
     "react": "19.2.4",

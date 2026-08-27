@@ -7,45 +7,50 @@ import { Hotel } from "@/lib/types";
 import { formatPrice } from "@/lib/data";
 import Link from "next/link";
 
-export const HotelCard = () => {
+export const HotelCard = ({ hotel }: { hotel: Hotel }) => {
   return (
-    <div className="border border-border rounded-xl flex overflow-hidden bg-white flex-col h-90">
+    <Link
+      href={`/hotels/${hotel.id}`}
+      className="border border-border rounded-xl flex overflow-hidden bg-white flex-col h-90"
+    >
       <div className="w-full relative flex-1 overflow-hidden">
         <Image
           alt="demo Image"
-          src={"/default.png"}
+          src={hotel.image}
           width={400}
           height={400}
           className="w-full h-full object-cover"
         />
         <span className="absolute top-2 left-2 text-[12px] p-1 px-2 rounded-full bg-white/90 text-black">
-          DOUALA
+          {hotel.city}
         </span>
       </div>
       <div className="p-4 flex flex-col gap-2 ">
         <div className="flex flex-col gap-2 pb-2 border-b border-border">
           <span className="flex w-full justify-between items-center">
-            <span className="font-bold">Blue Pearl</span>
+            <span className="font-bold">{hotel.name}</span>
             <span className="text-primary text-xs flex items-center gap-1">
               <HugeiconsIcon
                 icon={Star}
                 size={10}
                 className="fill-primary text-primary"
               />
-              4.9
+              {hotel.rating}
             </span>
           </span>
-          <p className="text-[14px]">Small description about the hotels</p>
+          <p className="text-[14px] line-clamp-1">{hotel.description}</p>
         </div>
         <div className="flex justify-between items-center">
           <span className="flex flex-col gap-1">
             <span className="text-xs">Starts at</span>
-            <span className="text-2xl font-bold">80,000 XAF</span>
+            <span className="text-2xl font-bold">
+              {hotel.formattedStartingPrice}
+            </span>
           </span>
           <HugeiconsIcon icon={ChevronRight} size={18} />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

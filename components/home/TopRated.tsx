@@ -5,6 +5,7 @@ import { HotelCard } from "../ui/hotelcard";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { hotels } from "@/lib/data";
 
 export const TopRated = () => {
   const routes = [
@@ -24,6 +25,7 @@ export const TopRated = () => {
       price: "6000",
     },
   ];
+  const featuredHotels = hotels.filter((h) => h.featured);
   return (
     <section className="flex flex-col container-x gap-6">
       <div className="w-full flex justify-between items-end">
@@ -41,8 +43,8 @@ export const TopRated = () => {
       {/* // card grid */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <HotelCard key={i} />
+        {featuredHotels.map((hotel, i) => (
+          <HotelCard hotel={hotel} key={i} />
         ))}
       </div>
 

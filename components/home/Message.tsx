@@ -1,8 +1,13 @@
-import { IdVerifiedIcon } from "@hugeicons/core-free-icons";
+import {
+  CustomerService01Icon,
+  IdVerifiedIcon,
+  Money,
+} from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import React from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 export const Message = () => {
   const stats = [
@@ -13,46 +18,46 @@ export const Message = () => {
         "Every appartment is inspected by our team to guarantee comfort and safety.",
     },
     {
-      icon: IdVerifiedIcon,
-      head: "Verified Properties",
+      icon: CustomerService01Icon,
+      head: "24/7 Concierge",
       description:
-        "Every appartment is inspected by our team to guarantee comfort and safety.",
+        "On-ground support for check-ins, maintenance, and local recommendations.",
     },
     {
-      icon: IdVerifiedIcon,
-      head: "Verified Properties",
+      icon: Money,
+      head: "Seamless Payment",
       description:
-        "Every appartment is inspected by our team to guarantee comfort and safety.",
+        "Secure booking with Mobile Money (MTN/Orange) and international cards.",
     },
   ];
 
   const methods = [
     {
-      icon: "",
+      icon: "/icon/poem_lg.jpg",
       label: "PoemPay",
     },
     {
-      icon: "",
+      icon: "/icon/mtn_lg.jpg",
       label: "MTN",
     },
     {
-      icon: "",
+      icon: "/icon/orange_lg.jpg",
       label: "Orange",
     },
     {
-      icon: "",
+      icon: "/icon/visa.png",
       label: "VISA / MASTER",
     },
   ];
   return (
     <section className="flex flex-col gap-4">
       <div className="w-full py-20 bg-secondary-foreground">
-        <div className="container-x text-white flex justify-between items-center gap-8">
+        <div className="container-x text-white flex justify-between flex-col md:flex-row items-center gap-8">
           <div className="flex flex-col gap-2">
             <h2>The POEM standard</h2>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 mt-4">
               {stats.map((stat, i) => (
-                <div className="flex gap-2" key={i}>
+                <div className="flex gap-2 items-start" key={i}>
                   <HugeiconsIcon className="text-primary" icon={stat.icon} />
                   <div className="flex flex-col gap-0.5">
                     <span>{stat.head}</span>
@@ -99,7 +104,13 @@ export const Message = () => {
               key={i}
               className="p-2 text-muted-foreground bg-white rounded-md border border-border flex gap-2 items-center"
             >
-              {method.icon}
+              <Image
+                src={method.icon}
+                width={30}
+                height={30}
+                className="rounded-md"
+                alt={method.label}
+              />
               {method.label}
             </div>
           ))}

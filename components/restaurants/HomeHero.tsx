@@ -1,9 +1,7 @@
 import { Search } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import React from "react";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
 import {
   Combobox,
   ComboboxContent,
@@ -13,9 +11,33 @@ import {
   ComboboxList,
 } from "../ui/combobox";
 
-export const RestaurantsHomeHero = () => {
-  const feats = ["Cuisines", "Price", "Ratings", "Delivery Time"];
-  const ratings = ["4.5+", "3+", "2+"];
+type RestaurantFilters = {
+  cuisine: string;
+  rating: string;
+  delivery: string;
+  openOnly: boolean;
+};
+
+export const RestaurantsHomeHero = ({
+  query,
+  onQueryChange,
+  filters,
+  onFilterChange,
+  onClearFilters,
+  cuisines,
+}: {
+  query: string;
+  onQueryChange: (query: string) => void;
+  filters: RestaurantFilters;
+  onFilterChange: <Key extends keyof RestaurantFilters>(
+    key: Key,
+    value: RestaurantFilters[Key],
+  ) => void;
+  onClearFilters: () => void;
+  cuisines: string[];
+}) => {
+  const ratings = ["4.5", "4", "3"];
+  const deliveryTimes = ["30", "45", "60"];
   return (
     <div className="bg-bg-mute/40 mt-[calc(var(--nav-height))] py-30">
       <div className="container-x flex flex-col items-center justify-center gap-4">
@@ -26,32 +48,59 @@ export const RestaurantsHomeHero = () => {
           Discover culinary excellence across the nation, curated for your
           palate.
         </span>
-        <div className="w-full max-w-xl gap-4 rounded-full shadow-md flex items-center bg-blue-50 p-4">
+        <form
+          className="w-full max-w-xl gap-4 rounded-full shadow-md flex items-center bg-blue-50 p-4"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <HugeiconsIcon
             icon={Search}
             size={20}
             className="text-muted-foreground"
           />
           <input
+            value={query}
+            onChange={(event) => onQueryChange(event.target.value)}
             className="bg-none border-none outline-0 flex-1 ring-0"
             placeholder="Search for restaurants, cuisines or dishes..."
+            aria-label="Search restaurants, cuisines or dishes"
           />
           <Button
+            type="submit"
             className={
               "rounded-full bg-secondary-foreground hover:bg-secondary-foreground/90 p-2 px-4 "
             }
           >
             Find Food
           </Button>
-        </div>
+        </form>
         <div className="flex gap-4 mt-2 items-center justify-center">
           <Combobox
-            // value={filter.price}
-            // onInputValueChange={(value) => UpdateFilter("price", value ?? "")}
+            value={filters.cuisine}
+            onValueChange={(value) => onFilterChange("cuisine", value ?? "")}
+            items={cuisines}
+          >
+            <ComboboxInput
+              className={"h-10 max-w-30 bg-white"}
+              placeholder="Cuisine"
+            />
+            <ComboboxContent>
+              <ComboboxEmpty>No items found.</ComboboxEmpty>
+              <ComboboxList>
+                {(item) => (
+                  <ComboboxItem key={item} value={item}>
+                    {item}
+                  </ComboboxItem>
+                )}
+              </ComboboxList>
+            </ComboboxContent>
+          </Combobox>
+          <Combobox
+            value={filters.rating}
+            onValueChange={(value) => onFilterChange("rating", value ?? "")}
             items={ratings}
           >
             <ComboboxInput
-              className={"h-10 rounded-full max-w-20 bg-white"}
+              className={"h-10 max-w-30 bg-white"}
               placeholder="Rating"
             />
             <ComboboxContent>
@@ -65,18 +114,39 @@ export const RestaurantsHomeHero = () => {
               </ComboboxList>
             </ComboboxContent>
           </Combobox>
-
-          {/* {feats.map((feat, i) => (
-            <span
-              key={i}
-              className={cn(
-                "p-2 px-6 text-[14px] rounded-full bg-white border border-border text-black",
-                i === 1 ? "bg-primary text-white" : "",
-              )}
-            >
-              {feat}
-            </span>
-          ))} */}
+          <Combobox
+            value={filters.delivery}
+            onValueChange={(value) => onFilterChange("delivery", value ?? "")}
+            items={deliveryTimes}
+          >
+            <ComboboxInput
+              className="h-10 max-w-36 bg-white"
+              placeholder="Delivery time"
+            />
+            <ComboboxContent>
+              <ComboboxEmpty>No items found.</ComboboxEmpty>
+              <ComboboxList>
+                {(item) => (
+                  <ComboboxItem key={item} value={item}>
+                    Under {item} min
+                  </ComboboxItem>
+                )}
+              </ComboboxList>
+            </ComboboxContent>
+          </Combobox>
+          <label className="flex items-center gap-2 text-xs whitespace-nowrap">
+            <input
+              type="checkbox"
+              checked={filters.openOnly}
+              onChange={(event) =>
+                onFilterChange("openOnly", event.target.checked)
+              }
+            />
+            Open now
+          </label>
+          <Button type="button" variant="outline" onClick={onClearFilters}>
+            Clear filters
+          </Button>
         </div>
       </div>
     </div>

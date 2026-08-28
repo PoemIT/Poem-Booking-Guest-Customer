@@ -3,18 +3,26 @@ import { AllBusHero } from "@/components/buses/all/AllBusHero";
 import { Experience } from "@/components/buses/all/experience";
 import { Hubs } from "@/components/buses/all/Hubs";
 import { busRoutes } from "@/lib/data";
-import React, { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import React, { Suspense, useEffect, useState } from "react";
 
 export interface OurFilter {
   destination: string;
   origin: string;
 }
 
-const AllBusesRouteBLock = () => {
+export const AllBusesRouteBLock = () => {
+  const searchParams = useSearchParams();
+
+  const urlFilters = {
+    destination: searchParams.get("destination"),
+    origin: searchParams.get("origin"),
+    departure: searchParams.get("departure"),
+  };
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<OurFilter>({
-    destination: "",
-    origin: "",
+    destination: urlFilters.destination ?? "",
+    origin: urlFilters.origin ?? "",
   });
 
   const updateFilters = (key: keyof OurFilter, value: string) => {
@@ -44,4 +52,10 @@ const AllBusesRouteBLock = () => {
   );
 };
 
-export default AllBusesRouteBLock;
+export const BusBlockDone = () => {
+  return (
+    <Suspense>
+      <AllBusesRouteBLock />
+    </Suspense>
+  );
+};

@@ -56,11 +56,6 @@ export const MealDetailsBlock = ({
                   key={i}
                   className="flex p-2 justify-center items-center text-xs gap-2 bg-white text-muted-foreground border border-bo rounded-md"
                 >
-                  {/* <HugeiconsIcon
-                    icon={ChickenThighsIcon}
-                    size={18}
-                    className="text-primary"
-                  /> */}
                   <span>{ingredient}</span>
                 </div>
               ))}

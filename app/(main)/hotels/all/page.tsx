@@ -1,8 +1,11 @@
-import { AllHotelsBlock } from "@/components/hotels/all/AllHotelsBlock";
+import {
+  AllHotelsBlock,
+  HotelsBlockDone,
+} from "@/components/hotels/all/AllHotelsBlock";
 import React from "react";
 
 const AllHotelsPage = () => {
-  return <AllHotelsBlock />;
+  return <HotelsBlockDone />;
 };
 
 export default AllHotelsPage;

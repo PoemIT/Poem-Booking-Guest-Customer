@@ -119,7 +119,7 @@ export default function SeatPicker({
       </div> */}
 
       <div className="rounded-xl">
-        <div className="mb-3 flex items-center justify-between text-xs text-neutral-500">
+        <div className="mb-3 flex items-center w-full md:w-[50%] mx-auto justify-between text-xs text-neutral-500">
           <div className="flex gap-2">
             <span className="rounded-md border border-neutral-300 bg-white px-2 py-1">
               Attendant
@@ -143,7 +143,7 @@ export default function SeatPicker({
                 <div
                   className="grid items-center justify-center gap-1.5"
                   style={{
-                    gridTemplateColumns: `repeat(${leftSeats.length}, 40px) 75% repeat(${rightSeats.length}, 40px)`,
+                    gridTemplateColumns: `repeat(${leftSeats.length}, 40px) 20% repeat(${rightSeats.length}, 40px)`,
                   }}
                 >
                   {leftSeats.map((seat) => (

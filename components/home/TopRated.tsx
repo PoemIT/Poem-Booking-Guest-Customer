@@ -5,7 +5,7 @@ import { HotelCard } from "../ui/hotelcard";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { hotels } from "@/lib/data";
+import { busRoutes, hotels } from "@/lib/data";
 
 export const TopRated = () => {
   const routes = [
@@ -108,8 +108,9 @@ export const TopRated = () => {
       <div className="flex flex-col gap-2">
         <span className="text-2xl font-bold">Popular Bus Routes</span>
         <div className="w-full grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {routes.map((route, i) => (
-            <div
+          {busRoutes.slice(0, 3).map((route, i) => (
+            <Link
+              href={`/buses/${route.id}`}
               className="border rounded-2xl p-6 flex gap-4 flex-col shadow-md"
               key={i}
             >
@@ -117,8 +118,10 @@ export const TopRated = () => {
                 <div className="flex gap-3 items-center">
                   <HugeiconsIcon icon={Bus} size={20} />
                   <div className="flex flex-col gap-0.5">
-                    <span className="font-bold">{route.route}</span>
-                    <span className="text-[14px]">{route.description}</span>
+                    <span className="font-bold">
+                      From {route.origin} to {route.destination}
+                    </span>
+                    <span className="text-[14px]">{route.frequency}</span>
                   </div>
                 </div>
                 <HugeiconsIcon icon={Heart} size={20} />
@@ -126,11 +129,11 @@ export const TopRated = () => {
               <div className="flex flex-col">
                 <span className="text-xs text-muted-foreground">From</span>
                 <div className="w-full flex justify-between">
-                  <span>{route.price} XAF</span>
+                  <span>{route.formattedStartingPrice}</span>
                   <span className="text-[14px]">Book Now</span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

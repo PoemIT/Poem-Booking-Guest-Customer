@@ -4,6 +4,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeft, ArrowRight } from "@hugeicons/core-free-icons";
 import { BusRouteCard } from "../ui/busrouteCard";
 import Link from "next/link";
+import { busRoutes } from "@/lib/data";
 
 export const PopularRoutesSection = () => {
   return (
@@ -22,8 +23,8 @@ export const PopularRoutesSection = () => {
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <BusRouteCard key={i} />
+        {busRoutes.slice(0, 4).map((route, i) => (
+          <BusRouteCard Busroute={route} key={i} />
         ))}
       </div>
     </section>

@@ -6,19 +6,64 @@ import { restaurants } from "@/lib/data";
 
 export const RestaurantHomeBlock = () => {
   const [loading, setLoading] = useState<boolean>(true);
+  const [query, setQuery] = useState("");
   const [filters, setFilters] = useState({
-    rating: 0,
+    cuisine: "",
+    rating: "",
+    delivery: "",
+    openOnly: false,
   });
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 3000);
   }, []);
+
+  const cuisines = Array.from(
+    new Set(restaurants.flatMap((restaurant) => restaurant.categories)),
+  ).sort();
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredRestaurants = restaurants.filter((restaurant) => {
+    const searchableText = JSON.stringify(restaurant).toLowerCase();
+    const deliveryValues = restaurant.deliveryMinutes.match(/\d+/g) ?? [];
+    const maxDeliveryMinutes = Number(deliveryValues.at(-1));
+
+    return (
+      (!normalizedQuery || searchableText.includes(normalizedQuery)) &&
+      (!filters.cuisine || restaurant.categories.includes(filters.cuisine)) &&
+      (!filters.rating || restaurant.rating >= Number(filters.rating)) &&
+      (!filters.delivery || maxDeliveryMinutes <= Number(filters.delivery)) &&
+      (!filters.openOnly || restaurant.isOpen)
+    );
+  });
+
+  const updateFilter = <Key extends keyof typeof filters>(
+    key: Key,
+    value: (typeof filters)[Key],
+  ) => setFilters((current) => ({ ...current, [key]: value }));
+
+  const clearFilters = () => {
+    setQuery("");
+    setFilters({
+      cuisine: "",
+      rating: "",
+      delivery: "",
+      openOnly: false,
+    });
+  };
+
   return (
     <div className="flex flex-col gap-20">
-      <RestaurantsHomeHero />
+      <RestaurantsHomeHero
+        query={query}
+        onQueryChange={setQuery}
+        filters={filters}
+        onFilterChange={updateFilter}
+        onClearFilters={clearFilters}
+        cuisines={cuisines}
+      />
       <RestaurantHomePageContent
-        restaurants={restaurants}
+        restaurants={filteredRestaurants}
         isLoading={loading}
       />
     </div>

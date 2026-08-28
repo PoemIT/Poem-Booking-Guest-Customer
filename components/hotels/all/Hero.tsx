@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { regions } from "@/lib/data";
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export type HotelFilters = {
   region: string;
@@ -19,9 +20,17 @@ export type HotelFilters = {
 
 interface FilterBlock {
   onChange?: (filters: HotelFilters) => void;
+  updateFilter: (key: keyof HotelFilters, value: string) => void;
+  filters: HotelFilters;
+  clearFilters: () => void;
 }
 
-export const AllHotelsHero = ({ onChange }: FilterBlock) => {
+export const AllHotelsHero = ({
+  onChange,
+  updateFilter,
+  filters,
+  clearFilters,
+}: FilterBlock) => {
   const priceRanges = [
     "under-100000",
     "100000-150000",
@@ -35,29 +44,7 @@ export const AllHotelsHero = ({ onChange }: FilterBlock) => {
     "nature-retreats",
     "heritage-stays",
   ];
-  const [filters, setFilters] = useState<HotelFilters>({
-    region: "",
-    priceRange: "",
-    rating: "",
-    collectionId: "",
-  });
-
-  const updateFilter = (key: keyof HotelFilters, value: string) => {
-    const nextFilters = { ...filters, [key]: value };
-    setFilters(nextFilters);
-    onChange?.(nextFilters);
-  };
-
-  const clearFilters = () => {
-    const emptyFilters: HotelFilters = {
-      region: "",
-      priceRange: "",
-      rating: "",
-      collectionId: "",
-    };
-    setFilters(emptyFilters);
-    onChange?.(emptyFilters);
-  };
+  const searchParams = useSearchParams();
 
   return (
     <div className="mt-(--nav-height) w-full py-8 flex flex-col gap-4">

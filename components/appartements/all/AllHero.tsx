@@ -40,7 +40,7 @@ export const AllAppartmentHero = ({
             onInputValueChange={(value) => updateFilter("city", value ?? "")}
             items={cities}
           >
-            <ComboboxInput className={"h-10"} placeholder="Select a Region" />
+            <ComboboxInput className={"h-10"} placeholder="Select a city" />
             <ComboboxContent>
               <ComboboxEmpty>No items found.</ComboboxEmpty>
               <ComboboxList>

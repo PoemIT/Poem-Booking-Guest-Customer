@@ -119,18 +119,20 @@ export const RouteDetailsBlock = () => {
               ))}
             </div>
           </div>
-          <SeatPicker
-            layout={{
-              totalRows: 14,
-              leftCount: 2,
-              rightCount: 3,
-              backDoorAfterSeat: 60,
-              price: 15,
-            }}
-            bookedSeats={[1, 2, 60]}
-            maxSelectable={3}
-            onConfirm={(seats) => console.log(seats)}
-          />
+          <div className="w-full p-4 bg-bg-mute rounded-2xl">
+            <SeatPicker
+              layout={{
+                totalRows: 14,
+                leftCount: 2,
+                rightCount: 3,
+                backDoorAfterSeat: 60,
+                price: 15,
+              }}
+              bookedSeats={[1, 2, 60]}
+              maxSelectable={3}
+              onConfirm={(seats) => console.log(seats)}
+            />
+          </div>
           <div className="p-6 bg-bg-mute/50 flex rounded-2xl gap-2">
             <div className=" h-fit w-fit p-2 bg-destructive/5 flex items-center justify-center rounded-full text-destructive">
               <HugeiconsIcon icon={Alert01FreeIcons} size={25} />

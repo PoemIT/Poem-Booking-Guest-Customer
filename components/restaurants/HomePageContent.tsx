@@ -122,13 +122,22 @@ export const RestaurantHomePageContent = ({
           <span>Regional specialties found near Your location</span>
         </div>
         <div>
-          <span className="text-muted-foreground">Sort by:</span>
+          <span className="text-muted-foreground">
+            {restaurants.length} restaurant{restaurants.length === 1 ? "" : "s"}{" "}
+            found
+          </span>
         </div>
       </div>
       <div className="grid grid-cols-1 mt-4 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {restaurants.map((restaurant, i) => (
-          <RestaurantMainCard restaurant={restaurant} key={i} />
-        ))}
+        {restaurants.length > 0 ? (
+          restaurants.map((restaurant) => (
+            <RestaurantMainCard restaurant={restaurant} key={restaurant.id} />
+          ))
+        ) : (
+          <p className="col-span-full py-12 text-center text-muted-foreground">
+            No restaurants match your search or filters.
+          </p>
+        )}
       </div>
     </section>
   );

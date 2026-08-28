@@ -1,3 +1,4 @@
+"use client";
 import { Clock, Redo } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
@@ -6,37 +7,49 @@ import { Button } from "./button";
 import Link from "next/link";
 import { BusRoute } from "@/lib/types";
 import { formatDuration } from "@/lib/data";
+import { usePathname } from "next/navigation";
 
 interface BusRouteCard {}
 
-export const BusRouteCard = () => {
+export const BusRouteCard = ({ Busroute }: { Busroute: BusRoute }) => {
+  const pathname = usePathname();
   return (
-    <div className="flex flex-col gap-4 h-80">
+    <Link
+      href={`${pathname}/${Busroute.id}`}
+      className="flex flex-col gap-4 h-80"
+    >
       <div className="flex-1 relative rounded-2xl overflow-hidden">
         <Image
-          src={"/default.png"}
+          src={Busroute.image}
           className="w-full h-full object-cover"
           width={300}
           height={300}
           alt="Img"
         />
         <span className="absolute top-4 left-4 p-1 px-2 bg-white/70 rounded-full text-xs">
-          4h 30m
+          {Busroute.duration.hours}h {Busroute.duration.minutes}min
         </span>
       </div>
       <div className=" flex justify-between">
         <div className="flex flex-col gap-0.5">
-          <span className="font-bold text-xl">Douala to Yaounde</span>
+          <span className="font-bold text-xl">
+            {Busroute.origin} to {Busroute.destination}
+          </span>
           <p className="text-[14px] text-muted-foreground">
-            Daily departures every 30 mins
+            {/* Daily departures every  mins */}
+            {Busroute.frequency}
           </p>
         </div>
         <div className="flex flex-col">
-          <span className="text-xs decoration-1">8,000 XAF</span>
-          <span className="text-2xl font-bold text-primary">7,000 XAF</span>
+          {/* <span className="text-xs decoration-1">
+            {Busroute.formattedStartingPrice}
+          </span> */}
+          <span className="text-2xl font-bold text-primary">
+            {Busroute.formattedStartingPrice}
+          </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

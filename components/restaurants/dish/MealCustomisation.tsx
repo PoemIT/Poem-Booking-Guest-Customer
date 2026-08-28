@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { formatPrice } from "@/lib/data";
 import { adon, Dish } from "@/lib/types";
 import { CartItem, useCartStore } from "@/lib/useCart";
 import { Minus, Plus } from "@hugeicons/core-free-icons";
@@ -149,7 +150,7 @@ export const MealCustomisation = ({ dish }: { dish: Dish }) => {
               <div className="flex items-center gap-2">
                 <span className="text-xs text-muted-foreground">Subtotal:</span>
                 <span className="text-primary text-xl">
-                  {MealPrice * MealData.quantity} XAF
+                  {formatPrice(MealPrice * MealData.quantity)}
                 </span>
               </div>
             </div>

@@ -1,8 +1,8 @@
-import AllBusesRouteBLock from "@/components/buses/all/AllBusRoutesBlock";
+import { BusBlockDone } from "@/components/buses/all/AllBusRoutesBlock";
 import React from "react";
 
 const BusRoutes = () => {
-  return <AllBusesRouteBLock />;
+  return <BusBlockDone />;
 };
 
 export default BusRoutes;

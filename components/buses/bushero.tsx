@@ -10,7 +10,7 @@ import {
   People,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 import {
   Combobox,
@@ -22,6 +22,9 @@ import {
 } from "../ui/combobox";
 import { regions } from "@/lib/data";
 import { DatePickerDemo } from "../ui/date-picker";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { BusFilter } from "../filtersblock/BusFilter";
 
 export const BusesHero = () => {
   return (
@@ -38,68 +41,16 @@ export const BusesHero = () => {
               Experience the gold standard of travel across Cameroon with
               premium fleets, verified safety, and world-class service.
             </p>
-            <Button className="p-6 w-40 flex items-center gap-2 ">
-              Explore Hotels <HugeiconsIcon icon={ArrowRight01FreeIcons} />
-            </Button>
+            <Link href={"/buses/all"}>
+              <Button className="p-6 w-40 flex items-center gap-2 ">
+                Explore Bus Routes{" "}
+                <HugeiconsIcon icon={ArrowRight01FreeIcons} />
+              </Button>
+            </Link>
           </div>
 
           <div className="w-full md:w-[85%] mt-8 shadow-md gap-4 text-black p-6 bg-white rounded-2xl border border-border flex flex-col">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="flex flex-col gap-1">
-                <span className="font-bold flex gap-1 items-center">
-                  <HugeiconsIcon icon={Location} size={12} />
-                  Origin
-                </span>
-                <Combobox items={regions}>
-                  <ComboboxInput
-                    className={"h-10"}
-                    placeholder="Select an Origin"
-                  />
-                  <ComboboxContent>
-                    <ComboboxEmpty>No items found.</ComboboxEmpty>
-                    <ComboboxList>
-                      {(item) => (
-                        <ComboboxItem key={item} value={item}>
-                          {item}
-                        </ComboboxItem>
-                      )}
-                    </ComboboxList>
-                  </ComboboxContent>
-                </Combobox>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="font-bold flex gap-1 items-center">
-                  <HugeiconsIcon icon={Location} size={12} />
-                  Destination
-                </span>
-                <Combobox items={regions}>
-                  <ComboboxInput
-                    className={"h-10"}
-                    placeholder="Select destination"
-                  />
-                  <ComboboxContent>
-                    <ComboboxEmpty>No items found.</ComboboxEmpty>
-                    <ComboboxList>
-                      {(item) => (
-                        <ComboboxItem key={item} value={item}>
-                          {item}
-                        </ComboboxItem>
-                      )}
-                    </ComboboxList>
-                  </ComboboxContent>
-                </Combobox>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="font-bold flex gap-1 items-center">
-                  <HugeiconsIcon icon={Calendar} size={12} />
-                  Departure
-                </span>
-                <DatePickerDemo />
-              </div>
-            </div>
-            <Button className={" p-5 w-full"}>
-              Find Best Routes <HugeiconsIcon icon={ArrowRight} size={20} />
-            </Button>
+            <BusFilter />
           </div>
         </div>
       </div>

@@ -1,22 +1,9 @@
 "use client";
-import {
-  ArrowRight01FreeIcons,
-  Location,
-  People,
-  Search,
-} from "@hugeicons/core-free-icons";
+import { ArrowRight01FreeIcons } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import {
-  Combobox,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from "../ui/combobox";
-import { regions } from "@/lib/data";
+import { HotelsFilters } from "../filtersblock/HotelsFilters";
 
 export const HeroMain = () => {
   return (
@@ -31,57 +18,15 @@ export const HeroMain = () => {
               Curated comfort across the nation from the mist of Mount Cameroon
               to the vibrant street of Douala. Explore Cameroon in one place.
             </p>
-            {/* <Link href={"/hotels/all"}>
+            <Link href={"/hotels/all"}>
               <Button className="p-6 w-40 flex items-center gap-2 ">
                 Explore Hotels <HugeiconsIcon icon={ArrowRight01FreeIcons} />
               </Button>
-            </Link> */}
+            </Link>
           </div>
 
-          <div className="w-fit mt-8 shadow-md text-black bg-white rounded-2xl border border-border flex flex-col">
-            <div className="w-full text-[14px] p-6 justify-between flex items-end gap-6">
-              <div className="flex flex-col gap-1">
-                <span className="font-bold flex gap-1 items-center">
-                  <HugeiconsIcon icon={Location} size={12} />
-                  Location
-                </span>
-                <Combobox items={regions}>
-                  <ComboboxInput
-                    className={"h-10"}
-                    placeholder="Select a Region"
-                  />
-                  <ComboboxContent>
-                    <ComboboxEmpty>No items found.</ComboboxEmpty>
-                    <ComboboxList>
-                      {(item: string) => (
-                        <ComboboxItem key={item} value={item}>
-                          {item}
-                        </ComboboxItem>
-                      )}
-                    </ComboboxList>
-                  </ComboboxContent>
-                </Combobox>
-              </div>
-              <Button className={"h-10 p-4 px-6"}>
-                Search
-                <HugeiconsIcon icon={Search} size={18} />
-              </Button>
-              {/* <div className="flex flex-col gap-1">
-                <span className="font-bold flex gap-1 items-center">
-                  <HugeiconsIcon icon={Calendar} size={12} />
-                  Dates
-                </span>
-                <p className="text-muted-foreground">Check in - Check out</p>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="font-bold flex gap-1 items-center">
-                  <HugeiconsIcon icon={People} size={12} />
-                  Guests
-                </span>
-                <p className="text-muted-foreground">2 Adults, 1 room</p>
-              </div> */}
-              <div className=""></div>
-            </div>
+          <div className="w-fit mt-8 shadow-md p-4 text-black bg-white rounded-2xl border border-border flex flex-col">
+            <HotelsFilters />
           </div>
         </div>
       </div>

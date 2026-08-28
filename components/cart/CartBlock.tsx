@@ -15,6 +15,7 @@ import { Textarea } from "../ui/textarea";
 import { CartItem as Item, useCartStore } from "@/lib/useCart";
 import { EmptyCart } from "../emptystuff";
 import { PaymentMethodSelectionGrid } from "../payments/MethodSelectionGrid";
+import { formatPrice } from "@/lib/data";
 
 const CartItem = ({ item }: { item: Item }) => {
   const { removeItem, increment, decrement } = useCartStore();
@@ -22,7 +23,7 @@ const CartItem = ({ item }: { item: Item }) => {
   return (
     <div className="py-4 border-b border-border flex justify-between items-end">
       <div className="flex items-center gap-3">
-        <div className="size-20 rounded-md overflow-hidden">
+        <div className="size-16 rounded-md overflow-hidden">
           <Image
             className="w-full h-full object-cover"
             width={200}
@@ -31,7 +32,7 @@ const CartItem = ({ item }: { item: Item }) => {
             src={item.dish.image}
           />
         </div>
-        <div className="flex flex-col gap-2.5">
+        <div className="flex flex-col">
           <div className="flex flex-col gap-1">
             <span className="font-bold">{item.dish.name}</span>
             <span className="text-xs text-muted-foreground">
@@ -39,8 +40,15 @@ const CartItem = ({ item }: { item: Item }) => {
             </span>
           </div>
           <span className="font-bold text-primary mt-auto">
-            {item.price} XAF
+            {formatPrice(Number(item.price))}
           </span>
+          <p className="text-muted-foreground text-xs">
+            {item.adons?.map((adon, i) => (
+              <span key={i}>
+                {adon.name} {`(${formatPrice(Number(adon.price))})`} ,
+              </span>
+            ))}
+          </p>
         </div>
       </div>
       <div className="flex flex-col gap-4 items-end">
@@ -217,11 +225,11 @@ export const CartBlock = () => {
         <div className="mt-4 flex flex-col gap-4 pb-6 border-b border-border">
           <div className="flex items-center text-muted-foreground text-xs justify-between">
             <span>Subtotal</span>
-            <span>{itemsPrice} FCFA</span>
+            <span>{formatPrice(itemsPrice)}</span>
           </div>
           <div className="flex items-center text-muted-foreground text-xs justify-between">
             <span>Delivery Fee</span>
-            <span>{deliveryFee} FCFA</span>
+            <span>{formatPrice(Number(deliveryFee))}</span>
           </div>
           <div className="flex items-center text-green-500 text-xs justify-between">
             <span className="flex items-center gap-1">
@@ -229,14 +237,14 @@ export const CartBlock = () => {
               <HugeiconsIcon icon={Coupon01FreeIcons} size={12} /> PoemPay
               Discount
             </span>
-            <span>- {poempayDiscount()} FCFA</span>
+            <span>- {formatPrice(poempayDiscount())} </span>
           </div>
         </div>
         <div className="flex justify-between mt-4">
           <span>Total</span>
           <div className="flex flex-col items-end text-end">
             <span className="text-primary text-xl">
-              {deliveryFee + itemsPrice - poempayDiscount()} FCFA
+              {formatPrice(deliveryFee + itemsPrice - poempayDiscount())}
             </span>
             <span className="text-xs text-muted-foreground">
               TAXES INCLUDED

@@ -27,8 +27,8 @@ export const regions = [
   "South",
   "South West",
 ];
-export const formatPrice = (price: number, currency = "XAF") =>
-  `${new Intl.NumberFormat("en-US").format(price)} ${currency}`;
+export const formatPrice = (price: number | string, currency = "XAF") =>
+  `${new Intl.NumberFormat("en-US").format(Number(price))} ${currency}`;
 
 export const formatDuration = ({
   hours,
@@ -2476,8 +2476,8 @@ export const cameroonCities = [
 ];
 
 export const ApartmentPriceRanges = [
-  "under-50000",
+  "Under-50000",
   "50000-100000",
   "100000-150000",
-  "over-150000",
+  "Over-150000",
 ];

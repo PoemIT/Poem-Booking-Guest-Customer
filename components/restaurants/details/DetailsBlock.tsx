@@ -22,7 +22,7 @@ export const RestaurantDetailsHero = ({
       className="hero text-white bg-cover bg-center"
     >
       <div className="w-full h-full bg-linear-180 from-black/20 to-secondary-foreground">
-        <div className="container-x flex flex-col pb-6 gap-6 md:flex-row justify-between h-full items-end">
+        <div className="container-x flex flex-col pb-6 gap-6 md:flex-row items-start justify-end md:justify-between h-full md:items-end">
           <div className="flex flex-col gap-4">
             <div className="flex gap-4 items-center">
               <span className="text-xs text-white bg-primary p-1 px-2 rounded-full">

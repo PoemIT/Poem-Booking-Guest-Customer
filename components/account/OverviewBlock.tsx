@@ -28,7 +28,7 @@ const HotelBookingsCard = () => {
         />
       </div>
       <div className="flex flex-col p-6 py-4">
-        <div className="flex justify-between mb-4 pb-4 border-b border-border items-center">
+        <div className="flex justify-between flex-col md:flex-row mb-4 pb-4 border-b border-border md:items-center">
           <div className="flex flex-col gap-0.5">
             <span className="text-2xl font-bold">Atlantic Bay Resort</span>
             <span className="text-xs text-muted-foreground flex items-center gap-2">
@@ -43,7 +43,7 @@ const HotelBookingsCard = () => {
             </span>
           </div>
         </div>
-        <div className="flex items-center flex-col md:flex-row gap-4 text-[16px]">
+        <div className="flex items-center flex-row gap-4 text-[16px]">
           <Button className={"p-6 flex-1"}>VIEW DETAILS</Button>
           <Button className={"p-6"} variant={"outline"}>
             Cancel
@@ -57,20 +57,20 @@ const HotelBookingsCard = () => {
 export const AccountOverviewBlock = () => {
   return (
     <section className="w-full flex flex-col gap-6">
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-end">
+      <div className="flex flex-col md:flex-row gap-4 justify-between md:items-end">
         <div className="flex flex-col gap-1">
           <h1 className="md:text-4xl text-2xl font-bold">Hello, Amadou.</h1>
           <p className="text-muted-foreground text-[14px]">
             Welcome back to your Poem Booking portal.
           </p>
         </div>
-        <div className="bg-bg-mute p-1 px-2 text-xs rounded-full flex items-center gap-2">
+        <div className="bg-bg-mute p-1 w-fit px-2 text-xs rounded-full flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-green-500" />
           <span>Account Active</span>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-6 rounded-2xl col-span-2 flex flex-col gap-6">
+        <div className="bg-white p-6 rounded-2xl md:col-span-2 flex flex-col gap-6">
           <div className="flex justify-between items-center gap-4">
             <span className="text-xl font-bold">Personal Details</span>
             <span className="flex gap-1 items-center text-xs text-primary">
@@ -131,11 +131,17 @@ export const AccountOverviewBlock = () => {
               <TabsTrigger value={"past"}>Past</TabsTrigger>
             </TabsList>
           </div>
-          <TabsContent value={"upcoming"} className={"grid grid-cols-2 gap-6"}>
+          <TabsContent
+            value={"upcoming"}
+            className={"grid grid-cols-1 md:grid-cols-2 gap-6"}
+          >
             <HotelBookingsCard />
             <HotelBookingsCard />
           </TabsContent>
-          <TabsContent value={"past"} className={"grid grid-cols-2 gap-6"}>
+          <TabsContent
+            value={"past"}
+            className={"grid grid-cols-1 md:grid-cols-2 gap-6"}
+          >
             <HotelBookingsCard />
             <HotelBookingsCard />
             <HotelBookingsCard />

@@ -61,7 +61,7 @@ export const AllAppartmentBlock = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-20 container-x">
+    <div className="flex flex-col gap-10 md:gap-20 container-x">
       <AllAppartmentHero
         filter={filters}
         clearFilter={() => ClearFilter()}

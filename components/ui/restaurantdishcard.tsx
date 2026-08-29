@@ -35,7 +35,9 @@ export const DishCard = ({ Dish }: { Dish: Dish }) => {
         <div className="w-full justify-between mt-2 flex items-center">
           <span className="text-primary text-xs">{Dish.formattedPrice}</span>
           <Button
-            onClick={() => router.push(`${pathname}/${Dish.id}`)}
+            onClick={() =>
+              router.push(`/restaurants/${Dish.restaurantId}/${Dish.id}`)
+            }
             className={"text-xs p-1 px-3 rounded-md"}
           >
             <HugeiconsIcon icon={Plus} size={18} />

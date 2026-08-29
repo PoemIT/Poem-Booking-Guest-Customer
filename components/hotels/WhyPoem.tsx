@@ -32,7 +32,7 @@ export const WhyPoem = () => {
         <div className="flex flex-col mt-4 gap-6">
           {feats.map((feat, i) => (
             <div className="flex gap-2 items-start" key={i}>
-              <div className="w-10 h-10 bg-secondary-foreground rounded-md text-secondary-foreground flex items-center justify-center">
+              <div className="w-10 shrink-0 h-10 bg-secondary-foreground rounded-md text-secondary-foreground flex items-center justify-center">
                 <HugeiconsIcon
                   icon={feat.icon}
                   size={24}
@@ -47,7 +47,7 @@ export const WhyPoem = () => {
           ))}
         </div>
       </div>
-      <div className="flex flex-1 h-112.5 rounded-2xl  relative">
+      <div className="flex flex-1 h-112.5 rounded-2xl items-center justify-center relative">
         <Image
           src={"/restau.jpg"}
           width={500}
@@ -55,7 +55,7 @@ export const WhyPoem = () => {
           className="w-full h-full object-cover rounded-2xl"
           alt="image"
         />
-        <div className="absolute p-4 border text-[14px] flex w-60 flex-col text-black gap-2 rounded-2xl -bottom-10 -left-10 border-white bg-white/40 backdrop-blur-[3px]">
+        <div className="absolute p-4 border text-[14px] flex w-60 flex-col text-black gap-2 rounded-2xl -bottom-10 -md:left-10 border-white bg-white/40 backdrop-blur-[3px]">
           <div className="flex gap-2">
             <div className="flex gap-1 items-center text-primary">
               {Array.from({ length: 5 }).map((_, i) => (

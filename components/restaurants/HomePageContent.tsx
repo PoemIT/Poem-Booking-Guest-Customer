@@ -116,7 +116,7 @@ export const RestaurantHomePageContent = ({
   }
   return (
     <section className="container-x flex flex-col gap-2">
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full flex flex-col gap-2 md:flex-row items-start md:items-center justify-between">
         <div className="flex gap-2 items-center">
           <HugeiconsIcon icon={Location} className="text-primary" size={20} />
           <span>Regional specialties found near Your location</span>

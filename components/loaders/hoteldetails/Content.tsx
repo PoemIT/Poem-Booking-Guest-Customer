@@ -4,7 +4,7 @@ import { LoadingRoomAccommodationCard } from "./LoadingRoomCard";
 
 export const LoadingHotelDetailsContent = () => {
   return (
-    <div className="container-x mb-20 flex gap-8">
+    <div className="container-x lg:mb-20 flex flex-col-reverse md:flex-row gap-6 md:gap-8">
       <div className="flex flex-col gap-20 flex-1">
         <div className="flex flex-col gap-4 text-[14px]">
           <h3 className="text-2xl font-bold border-b border-border pb-2">
@@ -15,18 +15,11 @@ export const LoadingHotelDetailsContent = () => {
             <Skeleton className="w-[40%] h-6" />
             <Skeleton className="w-[20%] h-6" />
           </div>
-          {/* <p>
-            The hotel seamlessly blends corporate efficiency with 'Curated
-            Comfort,' offering panoramic views of the city's lush hills. Its
-            architectural grandeur and meticulously designed interiors reflect a
-            commitment to luxury that has defined the Yaoundé skyline for
-            decades.
-          </p> */}
         </div>
 
         {/* Amenities section */}
         <div className="flex flex-col gap-4">
-          <h3 className="text-2xl font-bold pb-2">Amenities </h3>
+          {/* <h3 className="text-2xl font-bold pb-2">Amenities </h3> */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[1, 2, 4].map((_, i) => (
               <div
@@ -81,7 +74,7 @@ export const LoadingHotelDetailsContent = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full max-w-90 gap-4">
+      <div className="flex flex-col w-full md:max-w-90 gap-4">
         <div className="flex flex-col border border-secondary-foreground rounded-2xl overflow-hidden">
           <div className="p-6 bg-secondary-foreground text-white flex justify-between">
             <Skeleton className="h-8 w-30" />

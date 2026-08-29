@@ -39,7 +39,7 @@ export const RestaurantsHomeHero = ({
   const ratings = ["4.5", "4", "3"];
   const deliveryTimes = ["30", "45", "60"];
   return (
-    <div className="bg-bg-mute/40 mt-[calc(var(--nav-height))] py-30">
+    <div className="bg-bg-mute/40 mt-(--mobile-nav-height) md:mt-[calc(var(--nav-height))] py-30">
       <div className="container-x flex flex-col items-center justify-center gap-4">
         <span className="font-bold text-xs">
           The flavors of Cameroon, delivered.
@@ -73,14 +73,14 @@ export const RestaurantsHomeHero = ({
             Find Food
           </Button>
         </form>
-        <div className="flex gap-4 mt-2 items-center justify-center">
+        <div className="grid grid-cols-2 w-full md:grid-cols-6 gap-4 mt-2 items-center justify-center">
           <Combobox
             value={filters.cuisine}
             onValueChange={(value) => onFilterChange("cuisine", value ?? "")}
             items={cuisines}
           >
             <ComboboxInput
-              className={"h-10 max-w-30 bg-white"}
+              className={"h-10 min-w-30 bg-white"}
               placeholder="Cuisine"
             />
             <ComboboxContent>
@@ -100,7 +100,7 @@ export const RestaurantsHomeHero = ({
             items={ratings}
           >
             <ComboboxInput
-              className={"h-10 max-w-30 bg-white"}
+              className={"h-10 min-w-30 bg-white"}
               placeholder="Rating"
             />
             <ComboboxContent>
@@ -120,7 +120,7 @@ export const RestaurantsHomeHero = ({
             items={deliveryTimes}
           >
             <ComboboxInput
-              className="h-10 max-w-36 bg-white"
+              className="h-10 min-w-36 bg-white"
               placeholder="Delivery time"
             />
             <ComboboxContent>
@@ -144,7 +144,12 @@ export const RestaurantsHomeHero = ({
             />
             Open now
           </label>
-          <Button type="button" variant="outline" onClick={onClearFilters}>
+          <Button
+            type="button"
+            variant="outline"
+            className={"p-5"}
+            onClick={onClearFilters}
+          >
             Clear filters
           </Button>
         </div>

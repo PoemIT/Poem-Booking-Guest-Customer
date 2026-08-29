@@ -53,7 +53,7 @@ export const AccountSideBar = () => {
     },
   ];
   return (
-    <div className="h-full">
+    <div className="h-full hidden lg:flex">
       <div className="sticky top-[calc(var(--nav-height)+20px)] h-fit flex gap-4 flex-col">
         <div className="flex flex-col gap-2">
           {links.map((link) => (

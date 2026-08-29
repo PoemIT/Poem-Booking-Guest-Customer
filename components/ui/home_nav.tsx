@@ -7,46 +7,58 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
+  ApartmentIcon,
+  Bus01FreeIcons,
   CustomerService01FreeIcons,
+  Hotel01Icon,
+  House,
+  Restaurant01FreeIcons,
   ShoppingCart,
 } from "@hugeicons/core-free-icons";
 import { useCartStore } from "@/lib/useCart";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card";
 import { formatPrice } from "@/lib/data";
 import { EmptyCart } from "../emptystuff";
+import { icon } from "leaflet";
+
+export const Links = [
+  {
+    label: "Home",
+    link: "/",
+    key: "op",
+    icon: House,
+  },
+  {
+    label: "Hotels",
+    link: "/hotels",
+    key: "hotels",
+    icon: Hotel01Icon,
+  },
+  {
+    label: "Apartments",
+    link: "/appartment",
+    key: "appartment",
+    icon: ApartmentIcon,
+  },
+  {
+    label: "Buses",
+    link: "/buses",
+    key: "buses",
+    icon: Bus01FreeIcons,
+  },
+  {
+    label: "Restaurants",
+    link: "/restaurants",
+    key: "restaurants",
+    icon: Restaurant01FreeIcons,
+  },
+];
 
 export const HomeNavbar = () => {
   const pathname = usePathname();
   const isActive = (path: string) => {
     return pathname === path;
   };
-  const Links = [
-    {
-      label: "Home",
-      link: "/",
-      key: "op",
-    },
-    {
-      label: "Hotels",
-      link: "/hotels",
-      key: "hotels",
-    },
-    {
-      label: "Apartments",
-      link: "/appartment",
-      key: "appartment",
-    },
-    {
-      label: "Buses",
-      link: "/buses",
-      key: "buses",
-    },
-    {
-      label: "Restaurants",
-      link: "/restaurants",
-      key: "restaurants",
-    },
-  ];
 
   const { items } = useCartStore();
   return (

@@ -32,9 +32,9 @@ export const MealDetailsBlock = ({
     },
   ];
   return (
-    <main className="container-x flex flex-col gap-20 mt-[calc(var(--nav-height)+10px)]">
+    <main className="container-x flex flex-col gap-20 mt-(--mobile-nav-height) lg:mt-[calc(var(--nav-height)+10px)]">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-6 ">
-        <div className="col-span-3 flex flex-col gap-5">
+        <div className="md:col-span-3 flex flex-col gap-5">
           <div className=" h-100">
             <Image
               src={dish.image}
@@ -62,7 +62,7 @@ export const MealDetailsBlock = ({
             </div>
           </div>
         </div>
-        <div className="col-span-2 flex flex-col gap-6">
+        <div className="md:col-span-2 flex flex-col gap-6">
           <div className="flex flex-col gap-1 pb-4 border-b border-border">
             <h1 className="text-3xl font-bold">{dish.name}</h1>
             <span className="text-primary">{dish.formattedPrice}</span>
@@ -73,18 +73,19 @@ export const MealDetailsBlock = ({
       </div>
 
       <section className="flex flex-col gap-3">
-        <div className="w-full flex justify-between items-end">
+        <div className="w-full flex flex-col md:flex-row items-start gap-2 md:justify-between md:items-end">
           <div className="flex flex-col gap-2">
             <h2>From the same Kitchen</h2>
             <p className="text-muted-foreground text-[14px]">
               Complete your feast with these favorites
             </p>
           </div>
-
-          <Button onClick={() => router.back()} variant={"link"}>
-            View full menu
-            <HugeiconsIcon icon={ArrowRight} size={20} />
-          </Button>
+          <Link href={`/restaurants/${dish.restaurantId}`}>
+            <Button variant={"link"}>
+              View full menu
+              <HugeiconsIcon icon={ArrowRight} size={20} />
+            </Button>
+          </Link>
         </div>
         <div className="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2 lg:grid-cols-3">
           {others.map((meal, i) => (

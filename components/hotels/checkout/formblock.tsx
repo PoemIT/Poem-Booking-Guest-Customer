@@ -35,10 +35,10 @@ export const CheckoutFormBlock = () => {
     },
   ];
   return (
-    <section className="mt-[calc(var(--nav-height)+10px)] container-x flex flex-col gap-2">
+    <section className="lg:mt-[calc(var(--nav-height)+10px)] mt-(--mobile-nav-height) container-x flex flex-col gap-2">
       <h2>Complete your reservation</h2>
-      <div className="grid grid-cols-5 mt-4 gap-6">
-        <div className="col-span-3 flex flex-col gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-5 mt-4 gap-6">
+        <div className="md:col-span-3 flex flex-col gap-6">
           <div className="p-6 bg-bg-mute rounded-2xl">
             <span className="flex gap-2 items-center mb-4">
               <div className="size-8 bg-secondary-foreground flex items-center justify-center rounded-md text-white">
@@ -127,7 +127,7 @@ export const CheckoutFormBlock = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-2 flex flex-col gap-6">
+        <div className="md:col-span-2 flex flex-col gap-6">
           <div className="flex flex-col rounded-2xl border border-border shadow-md gap-4">
             <div></div>
             <div className="flex flex-col gap-2 p-6">

@@ -16,7 +16,7 @@ export const ExclusiveOffers = () => {
           <h2>Curated Exclusive Offers</h2>
           <p>Hand pick deals from our premium partner.</p>
         </div>
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           <Button
             className={"rounded-full"}
             size={"icon-lg"}
@@ -31,7 +31,7 @@ export const ExclusiveOffers = () => {
           >
             <HugeiconsIcon icon={ArrowRight01FreeIcons} />
           </Button>
-        </div>
+        </div> */}
       </div>
       <div className="w-full gap-6 grid grid-cols-1 md:grid-cols-2">
         <div className="flex flex-col text-white gap-10 p-6 bg-primary rounded-2xl">

@@ -9,7 +9,7 @@ import { busRoutes } from "@/lib/data";
 export const PopularRoutesSection = () => {
   return (
     <section className="flex container-x flex-col gap-6">
-      <div className="w-full flex items-end justify-between">
+      <div className="w-full flex flex-col gap-2 md:flex-row items-end justify-between">
         <div>
           <h2>Popular Inter-City Routes</h2>
           <p className="text-muted-foreground">

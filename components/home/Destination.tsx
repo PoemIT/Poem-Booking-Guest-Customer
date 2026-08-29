@@ -5,25 +5,25 @@ import React from "react";
 
 export const Destinations = () => {
   return (
-    <section className="flex container-x flex-col gap-6">
+    <section className="flex container-x flex-col gap-3">
       <div className="w-full flex items-center justify-between">
         <h2>Explore Destinations</h2>
         <span className="text-primary text-xs">View all Regions</span>
       </div>
-      <div className=" grid grid-cols-1 md:grid-rows-2 container-x max-h-screen md:max-h-140 border-none gap-2 md:grid-cols-4 relative">
+      <div className=" grid grid-cols-1 md:grid-rows-2 w-full h-fit md:max-h-140 border-none gap-4 md:grid-cols-4 relative">
         {hotelCollections.map((collection, index) => (
           <div
             key={index}
             className={cn(
-              "rounded-2xl overflow-hidden relative",
+              "rounded-2xl overflow-hidden h-40 md:h-auto relative",
               index === 0
-                ? "col-span-2 row-span-2"
+                ? "md:col-span-2 md:row-span-2"
                 : index === 1
-                  ? "col-span-1 row-span-1"
+                  ? "md:col-span-1 md:row-span-1"
                   : index === 2
-                    ? "col-span-1 row-span-1"
+                    ? "md:col-span-1 md:row-span-1"
                     : index === 3
-                      ? "col-span-2 row-span-1"
+                      ? "md:col-span-2 md:row-span-1"
                       : "",
             )}
           >

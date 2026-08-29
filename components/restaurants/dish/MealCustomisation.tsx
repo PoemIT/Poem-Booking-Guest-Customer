@@ -77,7 +77,7 @@ export const MealCustomisation = ({ dish }: { dish: Dish }) => {
     }
   };
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full">
       <div className="flex flex-col gap-3">
         <span className="text-[14px] font-bold">Customize your order</span>
         <div className="flex flex-col gap-4 text-xs">

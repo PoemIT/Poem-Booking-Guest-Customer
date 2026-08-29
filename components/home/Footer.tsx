@@ -55,7 +55,7 @@ export const Footer = () => {
     },
   ];
   return (
-    <footer className="py-20 mt-20 flex flex-col gap-8 bg-[#e6e2d8]">
+    <footer className="py-20 hidden mt-20 lg:flex flex-col gap-8 bg-[#e6e2d8]">
       <div className="container-x flex  gap-2 flex-col">
         <div className="w-full flex flex-col lg:flex-row border-b border-border justify-between">
           <div className="flex flex-col gap-6 w-full lg:w-[40%]">

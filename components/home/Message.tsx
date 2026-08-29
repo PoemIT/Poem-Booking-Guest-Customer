@@ -98,7 +98,7 @@ export const Message = () => {
       </div>
       <div className="container-x flex flex-col gap-6 text-center justify-center items-center">
         <span>SECURE PAYMENT PARTNERS</span>
-        <div className="w-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="w-fit grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {methods.map((method, i) => (
             <div
               key={i}

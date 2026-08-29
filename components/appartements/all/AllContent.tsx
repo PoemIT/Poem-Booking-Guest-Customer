@@ -12,7 +12,7 @@ import React from "react";
 const AppartmentCard = ({ apartment }: { apartment: Apartment }) => {
   const pathname = usePathname();
   return (
-    <div className="h-90 flex flex-col border border-border rounded-2xl overflow-hidden">
+    <div className="h-100 md:h-90 flex flex-col border border-border rounded-2xl overflow-hidden">
       <div className="flex-1 overflow-hidden">
         <Image
           src={apartment.image}

@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import { HomeNavbar } from "@/components/ui/home_nav";
 import { Footer } from "@/components/home/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { MobileNavigationTab } from "@/components/mobile/navigation";
+import { TopBar } from "@/components/mobile/topbar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -39,10 +41,12 @@ export default function RootLayout({
         inter.variable,
       )}
     >
-      <div className="min-h-full bg-background flex flex-col">
+      <div className="min-h-full pb-[calc(var(--mobile-nav-height)+10px)] lg:pb-0 bg-background flex flex-col">
         <HomeNavbar />
+        <TopBar />
         <Toaster />
         {children}
+        <MobileNavigationTab />
         <Footer />
       </div>
     </main>

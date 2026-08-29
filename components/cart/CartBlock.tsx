@@ -21,9 +21,9 @@ const CartItem = ({ item }: { item: Item }) => {
   const { removeItem, increment, decrement } = useCartStore();
 
   return (
-    <div className="py-4 border-b border-border flex justify-between items-end">
+    <div className="py-4 border-b border-border flex flex-col gap-2 md:flex-row justify-between md:items-end">
       <div className="flex items-center gap-3">
-        <div className="size-16 rounded-md overflow-hidden">
+        <div className="size-16 shrink-0 rounded-md overflow-hidden">
           <Image
             className="w-full h-full object-cover"
             width={200}
@@ -42,7 +42,7 @@ const CartItem = ({ item }: { item: Item }) => {
           <span className="font-bold text-primary mt-auto">
             {formatPrice(Number(item.price))}
           </span>
-          <p className="text-muted-foreground text-xs">
+          <p className="text-muted-foreground line-clamp-1 text-xs">
             {item.adons?.map((adon, i) => (
               <span key={i}>
                 {adon.name} {`(${formatPrice(Number(adon.price))})`} ,
@@ -51,13 +51,13 @@ const CartItem = ({ item }: { item: Item }) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col gap-4 items-end">
+      <div className="flex md:flex-col gap-2 md:gap-4 items-end">
         <Button
           onClick={() => {
             removeItem(item.dish.id);
           }}
           variant={"outline"}
-          size={"icon-sm"}
+          size={"icon-lg"}
         >
           <HugeiconsIcon icon={Trash} size={17} />
         </Button>
@@ -114,8 +114,8 @@ export const CartBlock = () => {
   };
 
   return (
-    <main className="container-x mt-[calc(var(--nav-height)+10px)] gap-6 grid grid-cols-1 md:grid-cols-5">
-      <div className="col-span-3 flex flex-col gap-6">
+    <main className="container-x mt-(--mobile-nav-height) lg:mt-[calc(var(--nav-height)+10px)] gap-6 grid grid-cols-1 md:grid-cols-5">
+      <div className="lg:col-span-3 flex flex-col gap-6">
         <h1 className="text-4xl font-bold">Checkout</h1>
 
         {/* cart item */}
@@ -176,7 +176,7 @@ export const CartBlock = () => {
             <div className="pt-4 border-t border-border flex flex-col pb-4 border-b gap-4">
               <div className="flex flex-col gap-4 text-xs">
                 <span className="text-xs font-bold">CONTACT PREFERENCES</span>
-                <div className="w-full grid grid-cols-2 md:grid-cols-3">
+                <div className="w-full grid gap-4 grid-cols-2 md:grid-cols-3">
                   <div className="flex items-center gap-2">
                     <Input type="radio" className="w-4 h-4" />
                     <label>Whatsapp</label>
@@ -220,7 +220,7 @@ export const CartBlock = () => {
           <PaymentMethodSelectionGrid />
         </div>
       </div>
-      <div className="bg-white col-span-2 p-6 flex flex-col h-fit rounded-2xl shadow-md">
+      <div className="bg-white w-full md:col-span-2 p-6 flex flex-col h-fit rounded-2xl shadow-md">
         <span className="text-xl font-bold">Summary</span>
         <div className="mt-4 flex flex-col gap-4 pb-6 border-b border-border">
           <div className="flex items-center text-muted-foreground text-xs justify-between">

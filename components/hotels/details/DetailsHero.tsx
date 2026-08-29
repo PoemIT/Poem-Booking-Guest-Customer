@@ -13,15 +13,20 @@ import { AlertTriangle, Location, Star } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import React from "react";
 
-export const DetailsHero = ({ hotel, isLoading }: { hotel: Hotel, isLoading: boolean }) => {
-
+export const DetailsHero = ({
+  hotel,
+  isLoading,
+}: {
+  hotel: Hotel;
+  isLoading: boolean;
+}) => {
   if (isLoading) {
-    return <LoadingGridHero />
+    return <LoadingGridHero />;
   }
 
   return (
-    <div className="hero grid grid-rows-2 gap-2 bg-secondary-foreground grid-cols-4 relative">
-      <div className="absolute top-0 left-0 w-full h-full  flex items-end p-6 bg-black/60 z-10">
+    <div className="hero grid grid-cols-1 md:grid-rows-2 gap-2 bg-secondary-foreground lg:grid-cols-4 relative">
+      <div className="absolute top-0 left-0 w-full h-full  flex items-end p-4 md:p-6 bg-black/60 z-10">
         <div className="container-x flex flex-col gap-2 justify-end">
           <div className="flex justify-between items-end">
             <div className="flex flex-col gap-2">
@@ -68,9 +73,9 @@ export const DetailsHero = ({ hotel, isLoading }: { hotel: Hotel, isLoading: boo
               : index === 1
                 ? "col-span-1 row-span-1"
                 : index === 2
-                  ? "col-span-1 row-span-1"
+                  ? "col-span-1 row-span-1 hidden md:flex"
                   : index === 3
-                    ? "col-span-2 row-span-1"
+                    ? "col-span-2 row-span-1 hidden md:flex"
                     : "",
           )}
         >

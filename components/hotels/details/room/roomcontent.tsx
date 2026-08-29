@@ -32,8 +32,8 @@ export const RoomContent = ({
   }
 
   return (
-    <section className="container-x grid gap-6 grid-cols-4">
-      <div className="col-span-3 flex flex-col gap-6">
+    <section className="container-x grid gap-6 grid-cols-1 md:grid-cols-4">
+      <div className="md:col-span-3 flex flex-col gap-6">
         <div className="flex flex-col gap-1 pb-6 border-b border-b-border">
           <div className="flex gap-2">
             <span className="p-1 px-3 text-xs rounded-full bg-primary text-white">
@@ -91,7 +91,7 @@ export const RoomContent = ({
           </div>
         </div>
       </div>
-      <div className="sticky top-[calc(var(--nav-height)+10px)] flex flex-col gap-6 h-[calc(100vh+9%)]">
+      <div className=" flex flex-col gap-6 ">
         <div className="p-6 border border-border rounded-2xl bg-white flex flex-col ">
           <span className="text-xl font-bold">Reservation Details</span>
           <div className="mt-3 flex flex-col gap-4 text-[14px]">

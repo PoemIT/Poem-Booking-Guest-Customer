@@ -28,14 +28,12 @@ import { BusFilter } from "../filtersblock/BusFilter";
 
 export const BusesHero = () => {
   return (
-    <section className="w-full flex items-center justify-center text-white h-[calc(600px+var(--nav-height))] bg-[url('/default.png')] bg-cover relative">
+    <section className="w-full flex items-center justify-center text-white h-screen md:h-[calc(600px+var(--nav-height))] bg-[url('/default.png')] bg-cover relative">
       <div className="absolute inset-0 bg-black/40">
-        <div className="w-full h-[600px] mt-(--nav-height) container-x border-b border-border flex flex-col justify-center">
-          <div className="flex flex-col gap-6 text-start w-full max-w-[50%]">
-            <h1 className="text-6xl flex flex-col gap-2 font-bold">
-              <span className="text-white font-bold">
-                Redefining the Road. Luxury Bus Travel.
-              </span>
+        <div className="w-full h-full md:h-150 md:mt-(--nav-height) container-x border-b border-border flex flex-col justify-center">
+          <div className="flex flex-col gap-6 text-start w-full md:max-w-[50%]">
+            <h1 className="text-4xl md:text-6xl flex flex-col gap-2 font-bold">
+              Redefining the Road. Luxury Bus Travel.
             </h1>
             <p className="text-gray-100">
               Experience the gold standard of travel across Cameroon with

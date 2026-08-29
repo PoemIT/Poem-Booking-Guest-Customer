@@ -23,26 +23,26 @@ export const MainHomeFilters = () => {
         <TabsTrigger value={"hotels"} className={""}>
           <span className="flex items-center gap-2 px-2">
             <HugeiconsIcon icon={Bed} size={18} />
-            Hotels
+            <span className="tri-label">Hotels</span>
           </span>
         </TabsTrigger>
         <TabsTrigger value={"apartments"}>
           <span className="flex items-center px-2 gap-2">
             <HugeiconsIcon icon={Building01Icon} size={18} />
-            Appartments
+            <span className="tri-label">Appartments</span>
           </span>
         </TabsTrigger>
         <TabsTrigger value={"bus"}>
           <span className="flex items-center px-2 gap-2">
             <HugeiconsIcon icon={Bus01FreeIcons} size={18} />
-            Buses
+            <span className="tri-label">Buses</span>
           </span>
         </TabsTrigger>
         <TabsTrigger value={"restaurants"}>
           <Link href={"/restaurants"}>
             <span className="flex items-center px-2 gap-2">
               <HugeiconsIcon icon={PlateFreeIcons} size={18} />
-              Restaurant
+              <span className="tri-label">Restaurant</span>
             </span>
           </Link>
         </TabsTrigger>

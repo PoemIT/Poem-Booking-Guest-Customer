@@ -56,7 +56,7 @@ const RoomAccommodationCard = ({ room }: { room: RoomType }) => {
   return (
     <div
       className={cn(
-        "flex overflow-hidden w-full flex-col max-h-80 md:max-h-60  md:flex-row gap-4 border border-border rounded-xl",
+        "flex overflow-hidden w-full flex-col max-h-100 md:max-h-60 md:flex-row md:gap-4 border border-border rounded-xl",
         room.premium && "border-primary",
       )}
     >
@@ -74,7 +74,7 @@ const RoomAccommodationCard = ({ room }: { room: RoomType }) => {
           </span>
         )}
       </div>
-      <div className="flex flex-col gap-2 flex-1 p-4 px-2 ">
+      <div className="flex flex-col gap-2 flex-1 p-4 md:px-2 ">
         <div className="flex justify-between items-end">
           <div className="flex flex-col gap-px">
             <span className="font-bold">{room.name}</span>
@@ -151,44 +151,45 @@ const ReviewsCard = ({
   );
 };
 
-
-
 // Main details content
 
-
 interface RoomsFilter {
-  guests: string,
-  checkIn: string,
-  checkout: string,
-  roomtype: RoomCategory | ""
+  guests: string;
+  checkIn: string;
+  checkout: string;
+  roomtype: RoomCategory | "";
 }
 
-
-
-export const DetailsContent = ({ hotel, isLoading }: { hotel: Hotel, isLoading: boolean }) => {
+export const DetailsContent = ({
+  hotel,
+  isLoading,
+}: {
+  hotel: Hotel;
+  isLoading: boolean;
+}) => {
   const policies = [
     "Cancellation: Free up to 24h before arrival for most bookings.",
     "Children: Free stay for children under 12 using existing bedding.",
     "Pets: Service animals only.",
   ];
-  const [rooms, setRooms] = useState<RoomType[]>(hotel.rooms)
-  const [myroomtype, setType] = useState("")
+  const [rooms, setRooms] = useState<RoomType[]>(hotel.rooms);
+  const [myroomtype, setType] = useState("");
   const [roomFilters, setRoomFilters] = useState<RoomsFilter>({
     guests: "",
     checkIn: "",
     checkout: "",
-    roomtype: ""
-  })
-  const [checking, setChecking] = useState<boolean>(false)
-  const RoomsBlock = useRef<HTMLDivElement>(null)
+    roomtype: "",
+  });
+  const [checking, setChecking] = useState<boolean>(false);
+  const RoomsBlock = useRef<HTMLDivElement>(null);
 
   if (isLoading) {
-    return <LoadingHotelDetailsContent />
+    return <LoadingHotelDetailsContent />;
   }
 
   const updateFilter = (key: keyof RoomsFilter, value: string) => {
-    setRoomFilters((prev) => ({ ...prev, [key]: value }))
-  }
+    setRoomFilters((prev) => ({ ...prev, [key]: value }));
+  };
 
   const checkAvailability = () => {
     const available = hotel.rooms.filter(
@@ -205,26 +206,27 @@ export const DetailsContent = ({ hotel, isLoading }: { hotel: Hotel, isLoading: 
     );
 
     if (available.length > 0) {
-      toast.success(`${available.length} Rooms are available for the selected filters`);
-      setRooms(available)
-      RoomsBlock.current?.scrollIntoView({ behavior: "smooth" })
+      toast.success(
+        `${available.length} Rooms are available for the selected filters`,
+      );
+      setRooms(available);
+      RoomsBlock.current?.scrollIntoView({ behavior: "smooth" });
     } else {
       toast.error("No rooms are available for the selected filters");
-      setRooms([])
+      setRooms([]);
     }
   };
 
-
   const InitiateCheck = () => {
-    setChecking(true)
+    setChecking(true);
     setTimeout(() => {
-      checkAvailability()
-      setChecking(false)
-    }, 2000)
-  }
+      checkAvailability();
+      setChecking(false);
+    }, 2000);
+  };
 
   return (
-    <div className="container-x mb-20 flex gap-8">
+    <div className="container-x lg:mb-20 flex flex-col-reverse gap-8">
       <div className="flex flex-col gap-20 flex-1">
         <div className="flex flex-col gap-4 text-[14px]">
           <h3 className="text-2xl font-bold border-b border-border pb-2">
@@ -260,17 +262,21 @@ export const DetailsContent = ({ hotel, isLoading }: { hotel: Hotel, isLoading: 
         <div className="flex flex-col gap-4" ref={RoomsBlock}>
           <h3 className="text-2xl font-bold pb-2">Accommodation</h3>
           <div className="flex flex-col gap-4">
-            {rooms.length > 0 ? rooms.map((room, i) => (
-              <RoomAccommodationCard room={room} key={i} />
-            )) : <EmptyHotelsRooms />}
+            {rooms.length > 0 ? (
+              rooms.map((room, i) => (
+                <RoomAccommodationCard room={room} key={i} />
+              ))
+            ) : (
+              <EmptyHotelsRooms />
+            )}
           </div>
         </div>
 
         {/* Guest Experience */}
         <div className="flex flex-col gap-4">
-          <div className="flex justify-between pb-3 border-b border-border items-end">
+          <div className="flex justify-between pb-3 flex-col gap-2 border-b border-border md:items-end">
             <h2 className="text-2xl font-bold pb-2">Guest Experiences</h2>
-            <div className="flex gap-2 items-end">
+            <div className="flex gap-2 flex-row-reverse items-center w-fit md:flex-row md:items-end">
               <div className="flex flex-col gap-0.5">
                 <span className="font-bold text-xl">{hotel.rating} / 5</span>
                 <span className="text-[14px] text-muted-foreground">
@@ -338,7 +344,7 @@ export const DetailsContent = ({ hotel, isLoading }: { hotel: Hotel, isLoading: 
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full max-w-90 gap-4">
+      <div className="flex flex-col w-full md:max-w-90 gap-4">
         <div className="flex flex-col border border-secondary-foreground rounded-2xl overflow-hidden">
           <div className="p-6 bg-secondary-foreground text-white flex justify-between">
             <div className="flex flex-col">
@@ -357,18 +363,31 @@ export const DetailsContent = ({ hotel, isLoading }: { hotel: Hotel, isLoading: 
 
           {/* filter forms */}
 
-          <form className="flex flex-col gap-4 p-6" onSubmit={(e) => {
-            e.preventDefault()
-            InitiateCheck()
-          }}>
+          <form
+            className="flex flex-col gap-4 p-6"
+            onSubmit={(e) => {
+              e.preventDefault();
+              InitiateCheck();
+            }}
+          >
             <div className="flex justify-between items-center gap-6">
               <div className="flex flex-1 flex-col gap-1">
                 <label className="text-[10px]">CHECK-IN </label>
-                <DatePickerDemo className="bg-white" onChange={(e) => updateFilter("checkIn", e ? format(e, "yyyy-MM-dd") : "")} />
+                <DatePickerDemo
+                  className="bg-white"
+                  onChange={(e) =>
+                    updateFilter("checkIn", e ? format(e, "yyyy-MM-dd") : "")
+                  }
+                />
               </div>
               <div className="flex flex-1 flex-col gap-1">
                 <label className="text-[10px]">CHECK-OUT</label>
-                <DatePickerDemo className="bg-white" onChange={(e) => updateFilter("checkout", e ? format(e, "yyyy-MM-dd") : "")} />
+                <DatePickerDemo
+                  className="bg-white"
+                  onChange={(e) =>
+                    updateFilter("checkout", e ? format(e, "yyyy-MM-dd") : "")
+                  }
+                />
               </div>
             </div>
             <div className="flex flex-1 flex-col gap-1">
@@ -383,10 +402,14 @@ export const DetailsContent = ({ hotel, isLoading }: { hotel: Hotel, isLoading: 
             </div>
             <div className="flex flex-1 flex-col gap-1">
               <label className="text-[10px]">Room Type</label>
-              <Combobox value={myroomtype} onInputValueChange={(e) => {
-                setType(e)
-                updateFilter("roomtype", e)
-              }} items={roomTypes}>
+              <Combobox
+                value={myroomtype}
+                onInputValueChange={(e) => {
+                  setType(e);
+                  updateFilter("roomtype", e);
+                }}
+                items={roomTypes}
+              >
                 <ComboboxInput
                   className="h-10"
                   placeholder="Select a room type"
@@ -403,8 +426,23 @@ export const DetailsContent = ({ hotel, isLoading }: { hotel: Hotel, isLoading: 
                 </ComboboxContent>
               </Combobox>
             </div>
-            <Button type="button" onClick={InitiateCheck} className={"p-6"} disabled={checking}>
-              {checking ? <HugeiconsIcon icon={Loader} size={16} className="animate-spin" /> : <>Check Availability <HugeiconsIcon icon={ArrowRight} /></>}
+            <Button
+              type="button"
+              onClick={InitiateCheck}
+              className={"p-6"}
+              disabled={checking}
+            >
+              {checking ? (
+                <HugeiconsIcon
+                  icon={Loader}
+                  size={16}
+                  className="animate-spin"
+                />
+              ) : (
+                <>
+                  Check Availability <HugeiconsIcon icon={ArrowRight} />
+                </>
+              )}
             </Button>
           </form>
         </div>

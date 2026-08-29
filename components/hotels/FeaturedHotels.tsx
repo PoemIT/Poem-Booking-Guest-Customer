@@ -9,7 +9,7 @@ import { hotels } from "@/lib/data";
 export const FeaturedHotels = () => {
   return (
     <section className="flex flex-col gap-6 container-x">
-      <div className="w-full flex flex-col md:flex-row items-end justify-between">
+      <div className="w-full flex flex-col md:flex-row gap-1 items-end justify-between">
         <div className="flex flex-col gap-1">
           <span className="text-primary text-xs">TOP RATED</span>
           <h2>Featured Hotels</h2>

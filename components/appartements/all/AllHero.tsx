@@ -21,7 +21,7 @@ export const AllAppartmentHero = ({
   clearFilter: () => void;
 }) => {
   return (
-    <div className="mt-(--nav-height) w-full py-8 flex flex-col gap-4">
+    <div className="lg:mt-(--nav-height) mt-(--mobile-nav-height) w-full py-8 flex flex-col gap-4">
       <div className="flex flex-col gap-3">
         <h1 className="text-4xl text-secondary-foreground font-bold">
           All Apartments

@@ -40,7 +40,7 @@ export const AllBusHero = ({
             items={cities}
           >
             <ComboboxInput
-              className={"h-10 text-[14px]"}
+              className={"h-10 text-[14px] w-full"}
               placeholder="Select a city"
             />
             <ComboboxContent>
@@ -65,7 +65,7 @@ export const AllBusHero = ({
             items={cities}
           >
             <ComboboxInput
-              className={"h-10 text-[14px]"}
+              className={"h-10 text-[14px] w-full"}
               placeholder="Select a city"
             />
             <ComboboxContent>
@@ -85,7 +85,7 @@ export const AllBusHero = ({
 
         <div className="flex flex-col items-start w-full gap-2">
           <span className="text-muted-foreground text-xs">Departure</span>
-          <DatePickerDemo className="min-w-55" />
+          <DatePickerDemo className="min-w-55 w-full" />
         </div>
 
         <Button

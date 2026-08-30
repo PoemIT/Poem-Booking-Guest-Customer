@@ -39,7 +39,7 @@ const PointsRedeemCard = () => {
 export const LoyaltyBlock = () => {
   return (
     <div className="flex flex-col gap-8">
-      <div className="p-6 rounded-2xl bg-secondary-foreground text-white flex flex-col gap-6">
+      <div className="p-6 rounded-2xl bg-secondary-foreground text-white flex flex-col gap-4 md:gap-6">
         <div className="flex items-center justify-between gap-4">
           <div className="flex text-xs flex-col gap-1">
             <span className="p-1 px-2 rounded-full text-white bg-white/20">
@@ -61,14 +61,16 @@ export const LoyaltyBlock = () => {
         </span>
 
         <div className="flex flex-col md:flex-row justify-between gap-4">
-          <span className="text-primary flex gap-0.5 items-end">
+          <span className="text-primary flex mb-4 md:mb-0 gap-0.5 items-end">
             <span className="text-2xl md:text-4xl font-bold">2,450</span>
             <span>XP POINTS</span>
           </span>
-          <div className="flex gap-2 flex-col items-center md:flex-row">
-            <Button className={"p-5"}>Redeem Points</Button>
+          <div className="flex gap-2.5 flex-1 md:flex-none flex-col items-center md:flex-row">
+            <Button className={"p-5 w-full md:w-fit"}>Redeem Points</Button>
             <Button
-              className={"p-5 hover:text-white bg-white/45 border border-white"}
+              className={
+                "p-5 hover:text-white w-full md:w-fit bg-white/45 border border-white"
+              }
               variant={"outline"}
             >
               How it works
@@ -77,7 +79,7 @@ export const LoyaltyBlock = () => {
         </div>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-5 gap-6">
-        <Tabs className="flex flex-col gap-4 col-span-3">
+        <Tabs className="flex flex-col gap-4 md:col-span-3">
           <div className="flex justify-between items-center gap-2">
             <span className="font-bold text-xl">Points History</span>
             <Link href={"/account/loyalty/history"}>

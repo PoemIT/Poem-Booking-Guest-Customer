@@ -17,7 +17,7 @@ export const AppartmentMainHero = () => {
           </div>
           <Link href={"/appartment/all"}>
             <Button className="p-6 w-40 flex items-center gap-2 ">
-              Explore Hotels <HugeiconsIcon icon={ArrowRight01FreeIcons} />
+              Explore Apartments <HugeiconsIcon icon={ArrowRight01FreeIcons} />
             </Button>
           </Link>
           <div className="w-full md:w-[85%]  shadow-md gap-4 text-black p-6 bg-white rounded-2xl border border-border flex flex-col">

@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const BookingHistoryCard = () => {
   return (
-    <div className="p-6 rounded-xl border bg-white border-border grid grid-cols-3 gap-5">
+    <div className="p-6 rounded-xl border bg-white border-border grid grid-cols-1 md:grid-cols-3 gap-5">
       <div className="rounded-xl overflow-hidden h-40">
         <Image
           src={"/restau.jpg"}
@@ -33,7 +33,7 @@ const BookingHistoryCard = () => {
             </div>
           </div>
           <div className="flex flex-col gap-2 md:flex-row">
-            <span className="text-xs flex gap-1 items-center p-1 px-2 rounded-full bg-green-500/30 h-fit text-green-500">
+            <span className="text-xs flex gap-1 w-fit items-center p-1 px-2 rounded-full bg-green-500/30 h-fit text-green-500">
               <HugeiconsIcon
                 icon={CircleCheck}
                 className="fill-green-500 text-white"
@@ -41,7 +41,7 @@ const BookingHistoryCard = () => {
               />
               Confirmed
             </span>
-            <div className="flex flex-col gap-0.5 text-end">
+            <div className="flex flex-col gap-0.5 md:text-end">
               <span className="text-xs text-muted-foreground">TOTAL PRICE</span>
               <span className="text-xl font-bold">12,000 XAF</span>
             </div>

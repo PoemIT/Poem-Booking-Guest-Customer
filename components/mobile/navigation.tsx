@@ -12,7 +12,7 @@ export const MobileNavigationTab = () => {
     return pathname === path;
   };
   return (
-    <footer className="grid h-(--mobile-nav-height) min-w-full bg-background items-center justify-center grid-cols-5 fixed -bottom-0.5 left-0 border-t border-border p-1 lg:hidden">
+    <footer className="grid h-(--mobile-nav-height) z-30 min-w-full bg-background items-center justify-center grid-cols-5 fixed -bottom-0.5 left-0 border-t border-border p-1 lg:hidden">
       {Links.map((link, i) => (
         <Link
           href={link.link}

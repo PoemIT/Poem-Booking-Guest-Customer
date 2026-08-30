@@ -95,7 +95,7 @@ export const AppartmentDetailsContent = ({
         </div>
         <div className="flex flex-col gap-4 pb-6 border-b border-border">
           <span className="text-2xl font-bold">What this place offers</span>
-          <div className="text-muted-foreground text-[14px] grid grid-cols-1 gap-4 md:grid-cols-2 ">
+          <div className="text-muted-foreground text-[14px] grid grid-cols-2 gap-4 md:grid-cols-3 ">
             {amenities.map((amenity, i) => (
               <div key={i} className="flex gap-2 text-primary items-center">
                 <HugeiconsIcon icon={amenity.icon} size={16} />

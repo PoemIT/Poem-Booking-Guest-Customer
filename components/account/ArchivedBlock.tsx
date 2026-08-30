@@ -17,7 +17,7 @@ import { Button } from "../ui/button";
 
 const HistoryCard = () => {
   return (
-    <div className="p-4 rounded-md border border-border bg-white flex justify-between items-center flex-col md:flex-row">
+    <div className="p-4 rounded-md border border-border bg-white flex justify-between md:items-center flex-col md:flex-row">
       <div className="flex gap-2">
         <div className="w-10 h-10 rounded-full bg-primary/50 flex items-center justify-center">
           <HugeiconsIcon icon={BadgeAlert} size={18} className="text-primary" />

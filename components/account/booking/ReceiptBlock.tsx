@@ -240,24 +240,24 @@ const BusReciept = () => {
 const HotelReciept = () => {
   return (
     <div className="flex items-center overflow-hidden w-full text-[14px] justify-center bg-white shadow-md rounded-2xl flex-col ">
-      <div className="flex justify-between items-center gap-6 w-full p-6">
+      <div className="flex justify-between flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 w-full p-4 md:p-6">
         <div className="flex flex-col gap-0.5">
           <span className="text-xl font-bold">Payment Receipt</span>
           <p className="text-muted-foreground text-xs">
             Thank you for choosing POEM Booking for your stay at Kribi.
           </p>
         </div>
-        <div className="flex flex-col items-end gap-2.5">
-          <span className="text-[10px] bg-primary p-1 px-2 rounded-full">
+        <div className="flex flex-col md:items-end gap-2.5">
+          <span className="text-[10px] w-fit bg-primary p-1 px-2 rounded-full">
             PAID IN FULL
           </span>
-          <div className="flex flex-col items-end">
+          <div className="flex flex-col md:items-end">
             <span className="text-xs text-muted-foreground">RECEIPT NO</span>
             <span className="font-bold">REC-8821-4490</span>
           </div>
         </div>
       </div>
-      <div className="grid md:grid-cols-3 bg-bg-mute/30 border-y border-border w-full gap-6 grid-cols-1">
+      <div className="grid md:grid-cols-3 bg-bg-mute/30 border-y border-border w-full gap-2 md:gap-6 grid-cols-1">
         <div className="flex flex-col gap-2 p-4 md:p-6 border-r border-border">
           <span className="text-xs text-muted-foreground">DATE OF ISSUE</span>
           <span className="font-bold">October 12, 2024</span>
@@ -326,7 +326,7 @@ const HotelReciept = () => {
               <span className="text-muted-foreground">
                 Service & Booking Fee
               </span>
-              <span className="font-bold">12,000 XAF</span>
+              <span className="font-bold whitespace-nowrap">12,000 XAF</span>
             </div>
             <div className="w-full flex items-center justify-between pb-4 border-b border-border gap-4">
               <span className="text-muted-foreground">
@@ -334,7 +334,7 @@ const HotelReciept = () => {
               </span>
               <span className="font-bold">19,957 XAF</span>
             </div>
-            <div className="flex justify-between items-end">
+            <div className="flex flex-col md:flex-row justify-between md:items-end">
               <div className="flex flex-col gap-0.5">
                 <span className="text-xs text-primary">TOTAL AMOUNT PAID</span>
                 <span className="text-xl font-bold">245,000 XAF</span>
@@ -345,13 +345,13 @@ const HotelReciept = () => {
         </div>
       </div>
 
-      <div className="w-full text-white bg-secondary-foreground p-6 flex justify-between">
-        <div className="text-[10px] flex flex-col gap-0.5">
+      <div className="w-full text-white flex-col-reverse md:flex-row gap-4 text-center bg-secondary-foreground p-6 flex justify-between">
+        <div className="text-[10px] flex flex-col md:text-start gap-0.5">
           <span>Need assistance with this booking?</span>
           <span className="opacity-60">Contact POEM Support 24/7</span>
         </div>
         <div className="flex gap-4">
-          <Button className={"p-4"}>
+          <Button className={"p-4 flex-1"}>
             <HugeiconsIcon icon={Download} size={18} />
             Download PDF
           </Button>

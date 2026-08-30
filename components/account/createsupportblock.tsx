@@ -95,7 +95,7 @@ export const CreateSupportBlock = () => {
               <HugeiconsIcon icon={CircleAlert} size={18} />
               <p>Priority status will be applied to your account.</p>
             </div>
-            <div className="flex gap-4 flex-col md:flex-row">
+            <div className="flex gap-4 w-full md:w-fit flex-col md:flex-row">
               <Button className={"p-6 rounded-md"} variant={"outline"}>
                 Save Draft
               </Button>

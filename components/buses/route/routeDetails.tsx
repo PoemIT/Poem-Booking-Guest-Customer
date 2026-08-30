@@ -59,8 +59,8 @@ export const RouteDetailsBlock = () => {
     "Arrive 45 mins early for luggage tagging.",
   ];
   return (
-    <main className="container-x flex flex-col mt-(--nav-height) gap-20">
-      <div className="p-6 w-full rounded-2xl bg-bg-mute/50 flex items-end justify-between">
+    <main className="container-x flex flex-col mt-(--mobile-nav-height) md:mt-(--nav-height) gap-10 md:gap-20">
+      <div className="p-6 w-full flex-col md:flex-row gap-4 rounded-2xl bg-bg-mute/50 flex md:items-end justify-between">
         <div className="flex flex-col gap-1">
           <span className="text-primary flex gap-1.5 text-[14px]">
             <HugeiconsIcon icon={Bus} size={20} className="text-primary" />
@@ -86,15 +86,15 @@ export const RouteDetailsBlock = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
-        <div className="flex flex-col col-span-3 gap-4">
-          <div className="w-full flex justify-between items-center">
+        <div className="flex flex-col md:col-span-3 gap-4">
+          <div className="w-full flex-col md:flex-row flex justify-between gap-2 md:items-center">
             <div className="flex flex-col">
               <span className="text-xl font-bold">Select your seat</span>
               <span className="text-muted-foreground text-xs">
                 70-Seater Executive Coach
               </span>
             </div>
-            <div className="flex bg-bg-mute rounded-md overflow-hidden text-xs">
+            <div className="flex bg-bg-mute w-fit rounded-md overflow-hidden text-xs">
               {Ranges.map((range, i) => (
                 <div
                   key={i}
@@ -150,7 +150,7 @@ export const RouteDetailsBlock = () => {
             </div>
           </div>
         </div>
-        <div className="sticky top-[calc(var(--nav-height)+10px)] flex flex-col gap-6 h-[calc(100vh+9%)]">
+        <div className="sticky top-[calc(var(--nav-height)+10px)] flex flex-col gap-6 h-fit md:h-[calc(100vh+9%)]">
           <div className="flex h-fit flex-col gap-6 p-6 bg-white border-border border rounded-2xl">
             <span className="font-bold">Booking Details</span>
             <div className="flex flex-1 flex-col justify-center gap-1.5">

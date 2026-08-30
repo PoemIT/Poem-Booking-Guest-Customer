@@ -26,6 +26,7 @@ export const TopBar = () => {
     <div className="fixed h-[calc(var(--mobile-nav-height))]  bg-background flex z-40 justify-between items-center p-2 lg:hidden top-0 w-full border-b border-border">
       <div className="flex gap-1 items-center">
         <Image src="/logo.png" alt="Poem Booking" width={50} height={50} />
+
         {/* <span className="font-bold">Poem Booking</span> */}
       </div>
       <div className="flex gap-6 items-center">

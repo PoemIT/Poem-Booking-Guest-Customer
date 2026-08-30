@@ -17,6 +17,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import { MobileFilter } from "./MobileFilter";
 
 interface Voyages {
   index: number;
@@ -49,8 +50,8 @@ const VoyagesBlock = ({
   ];
   return (
     <div className="p-6 md:p-8 rounded-xl border-2 h-fit md:h-60 border-border grid grid-cols-1 md:grid-cols-4 gap-6 md:flex-row">
-      <div className="w-full flex items-center justify-center flex-col gap-4">
-        <div className="w-25 h-25 rounded-full overflow-hidden">
+      <div className="w-full flex items-center md:justify-center item md:flex-col gap-4">
+        <div className="w-12 h-12 md:w-25 md:h-25 rounded-full overflow-hidden">
           <Image
             src={operator?.logo ?? "/default.png"}
             className="w-full h-full"
@@ -61,18 +62,18 @@ const VoyagesBlock = ({
         </div>
         <div className="flex flex-col gap-1 text-center">
           <span>{operator?.name ?? "Bus operator"}</span>
-          <span className="text-xs bg-primary/10 text-primary p-1 px-2 rounded-full">
+          <span className="text-xs w-fit md:bg-primary/10 font-bold text-primary md:p-1 md:px-2 md:rounded-full">
             {departure.class}
           </span>
         </div>
       </div>
-      <div className="flex-1 pl-6 border-l-2 border-border flex col-span-3 flex-col gap-6">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+      <div className="flex-1 md:pl-6 border-b md:border-b-0  md:border-l-2 border-border flex col-span-3 flex-col gap-6">
+        <div className="grid grid-cols-3 gap-6 md:grid-cols-4">
           <div className="flex flex-col">
             <span className="text-xl font-bold">{departure.departureTime}</span>
             <div className="flex flex-col gap-0.5">
               <span className="text-muted-foreground">{busRoute.origin}</span>
-              <span className="text-muted-foreground text-xs">
+              <span className="text-muted-foreground hidden md:flex text-xs">
                 ({departure.originStation})
               </span>
             </div>
@@ -92,12 +93,12 @@ const VoyagesBlock = ({
             <span className="text-muted-foreground">
               {busRoute.destination}
             </span>
-            <span className="text-muted-foreground text-xs">
+            <span className="text-muted-foreground hidden md:flex text-xs">
               {" "}
               ({departure.destinationStation})
             </span>
           </div>
-          <div className="text-end flex flex-col">
+          <div className="text-end hidden md:flex flex-col">
             <span className="text-muted-foreground">{departure.class}</span>
             {/* <span className="text-muted-foreground text-xs">
               {departure.departureDate}
@@ -107,25 +108,37 @@ const VoyagesBlock = ({
             </span>
           </div>
         </div>
-        <div className="w-full flex justify-between mt-auto items-center flex-col md:flex-row gap-4">
-          <div className="flex gap-4 items-center">
-            {ammenities.map((ammenity, i) => (
-              <span
-                key={i}
-                className="flex gap-1 items-center text-[14px] text-muted-foreground"
-              >
-                <HugeiconsIcon
-                  icon={ammenity.icon}
-                  size={18}
-                  className="font-bold"
-                  strokeWidth={2}
-                />
-                <span>{ammenity.label}</span>
+        <div className="w-full flex border-t border-border pt-4 md:pt-0 md:border-none justify-between mt-auto items-center flex-col md:flex-row gap-4">
+          <div className="w-full flex items-center justify-between">
+            <div className="flex gap-4 items-center">
+              {ammenities.map((ammenity, i) => (
+                <span
+                  key={i}
+                  className="flex gap-1 items-center text-xs font-bold md:font-normal md:text-[14px] text-muted-foreground"
+                >
+                  <HugeiconsIcon
+                    icon={ammenity.icon}
+                    size={18}
+                    className="font-bold"
+                    strokeWidth={2}
+                  />
+                  <span>{ammenity.label}</span>
+                </span>
+              ))}
+            </div>
+            <div className="text-end flex md:hidden flex-col">
+              <span className="text-xl font-bold">
+                {departure.formattedPrice}
               </span>
-            ))}
+            </div>
           </div>
-          <Link className="w-fit" href={`${pathname}/${departure.id}`}>
-            <Button className={"p-6 w-40 text-[16px]"}>Select Seats</Button>
+          <Link
+            className="md:w-fit w-full "
+            href={`${pathname}/${departure.id}`}
+          >
+            <Button className={"p-6 min-w-40 flex-1 w-full text-[16px]"}>
+              Select Seats
+            </Button>
           </Link>
         </div>
       </div>
@@ -171,8 +184,8 @@ export const RouteBlock = ({ busRoute }: { busRoute: BusRoute }) => {
     },
   ];
   return (
-    <section className="container-x flex flex-col mt-(--nav-height) gap-20">
-      <div className="bg-secondary-foreground flex justify-between items-center p-6 rounded-2xl">
+    <section className="container-x flex flex-col mt-(--mobile-nav-height) lg:mt-(--nav-height) gap-10 md:gap-20">
+      <div className="bg-secondary-foreground flex flex-col md:flex-row gap-4 justify-between md:items-center p-6 rounded-2xl">
         <div className="flex flex-col gap-2">
           <span className="flex text-white text-2xl items-center gap-3">
             <span className="font-bold">{busRoute.origin}</span>
@@ -191,8 +204,8 @@ export const RouteBlock = ({ busRoute }: { busRoute: BusRoute }) => {
           <HugeiconsIcon icon={Pen} size={14} /> Change Search
         </Button>
       </div>
-      <div className="min-h-screen gap-6 grid grid-cols-4">
-        <div className="sticky top-[calc(var(--nav-height)+10px)] flex flex-col gap-6 h-[calc(100vh-13%)]">
+      <div className="min-h-screen gap-4 md:gap-6 grid grid-cols-1 lg:grid-cols-4">
+        <div className="sticky hidden top-[calc(var(--nav-height)+10px)] lg:flex flex-col gap-6 h-[calc(100vh-13%)]">
           <div className="flex flex-col gap-6 bg-bg-mute/50 border-2 flex-1 border-border rounded-2xl p-6 ">
             {filters.map((group) => (
               <div key={group.id} className="flex flex-col gap-2">
@@ -228,13 +241,14 @@ export const RouteBlock = ({ busRoute }: { busRoute: BusRoute }) => {
             </div>
           </div>
         </div>
+        <MobileFilter />
         <div className="flex col-span-3 flex-col gap-6">
-          <div className="bg-bg-mute rounded-xl p-4 flex justify-between">
+          <div className="bg-bg-mute rounded-xl text-xs p-4 flex justify-between">
             <span className="flex items-center gap-2">
               <HugeiconsIcon icon={ArrowLeft} size={16} />
               Previous day
             </span>
-            <span className="font-bold text-xl">Today, May 24</span>
+            <span className="font-bold md:text-xl">Today, May 24</span>
             <span className="flex items-center gap-2">
               Next day
               <HugeiconsIcon icon={ArrowRight} size={16} />

@@ -67,15 +67,15 @@ export function SecurityAccountCard() {
 export const ProfileBlock = () => {
   return (
     <div className="flex flex-col gap-6">
-      <div className="w-full flex flex-col md:flex-row justify-between items-center">
+      <div className="w-full flex flex-col gap-2 md:flex-row justify-between md:items-center">
         <div className="flex gap-2 items-center">
           <Avatar className={"size-14"}>
             <AvatarFallback>PP</AvatarFallback>
           </Avatar>
-          <div className="flex flex-col">
-            <div className="flex gap-2 items-center">
+          <div className="flex gap-1 flex-col">
+            <div className="flex gap-2 flex-col md:flex-row md:items-center">
               <span className="text-xl font-bold">Amadou Aboubakar</span>
-              <div className="text-[10px] bg-bg-mute p-1 px-2 flex gap-1 text-muted-foreground rounded-full items-center">
+              <div className="text-[10px] bg-bg-mute w-fit p-1 px-2 flex gap-1 text-muted-foreground rounded-full items-center">
                 <div className="w-2 h-2 rounded-full bg-green-500" />
                 ACCOUNT ACTIVE
               </div>
@@ -83,7 +83,7 @@ export const ProfileBlock = () => {
             <span className="text-xs">Member since January 2023</span>
           </div>
         </div>
-        <Button className={"p-4 h-10 min-w-30"}>Edit Profile</Button>
+        <Button className={"p-4 h-10 w-fit md:min-w-30"}>Edit Profile</Button>
       </div>
       <div className="bg-white p-6 rounded-2xl col-span-2 flex flex-col gap-6">
         <div className="flex justify-between items-center gap-4">

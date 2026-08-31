@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export const Footer = () => {
@@ -7,52 +8,56 @@ export const Footer = () => {
       links: [
         {
           label: "Hotels",
-          link: "",
+          link: "/hotels",
         },
         {
           label: "Appartments",
-          link: "",
+          link: "/appartment",
         },
         {
           label: "Bus Routes",
-          link: "",
+          link: "/buses",
+        },
+        {
+          label: "Restaurants",
+          link: "/restaurants",
         },
       ],
     },
     {
-      head: "Discover",
+      head: "Support",
       links: [
         {
-          label: "Hotels",
+          label: "Support Centre",
           link: "",
         },
         {
-          label: "Appartments",
+          label: "Terms & Conditions",
           link: "",
         },
         {
-          label: "Bus Routes",
+          label: "Privacy Policy",
           link: "",
         },
       ],
     },
-    {
-      head: "Settings",
-      links: [
-        {
-          label: "Hotels",
-          link: "",
-        },
-        {
-          label: "Appartments",
-          link: "",
-        },
-        {
-          label: "Bus Routes",
-          link: "",
-        },
-      ],
-    },
+    // {
+    //   head: "Settings",
+    //   links: [
+    //     {
+    //       label: "Hotels",
+    //       link: "",
+    //     },
+    //     {
+    //       label: "Appartments",
+    //       link: "",
+    //     },
+    //     {
+    //       label: "Bus Routes",
+    //       link: "",
+    //     },
+    //   ],
+    // },
   ];
   return (
     <footer className="py-20 hidden mt-20 lg:flex flex-col gap-8 bg-[#e6e2d8]">
@@ -70,20 +75,27 @@ export const Footer = () => {
               <span className="font-bold">{link.head}</span>
               <div className="flex flex-col gap-2">
                 {link.links.map((l, i) => (
-                  <span className="text-muted-foreground" key={i}>
+                  <Link
+                    href={l.link}
+                    className="text-muted-foreground hover:text-primary text-[14px]"
+                    key={i}
+                  >
                     {l.label}
-                  </span>
+                  </Link>
                 ))}
               </div>
             </div>
           ))}
         </div>
-        <div className="w-full flex pt-4 border-border border justify-between items-center">
+        <div className="w-full flex pt-6 border-secondary-foreground/40 mt-4 text-[14px] text-muted-foreground border-t justify-between items-center">
           <span>
             &copy; {new Date().getFullYear()} POEM Booking platform. All rights
             Reserved
           </span>
-          <span>LinkedIn</span>
+          <div className="flex items-center gap-4">
+            <span>Instagram</span>
+            <span>LinkedIn</span>
+          </div>
         </div>
       </div>
     </footer>

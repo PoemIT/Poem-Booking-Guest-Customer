@@ -70,7 +70,7 @@ export const AppartmentDetailsContent = ({
 
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-6">
-      <div className="md:col-span-3 flex flex-col gap-6">
+      <div className="md:col-span-3 order-2 md:order-1 flex flex-col gap-6">
         <div className="flex flex-col pb-5 border-b gap-0.5 border-border">
           <div className="flex gap-2 items-center text-[14px]">
             <span className="p-1 bg-primary px-2 rounded-full text-white">
@@ -113,7 +113,7 @@ export const AppartmentDetailsContent = ({
           </div>
         </div>
       </div>
-      <div className="flex flex-col p-4 gap-4 rounded-2xl h-fit bg-bg-mute">
+      <div className="flex flex-col p-4 order-1 md:order-2 gap-4 rounded-2xl h-fit bg-bg-mute">
         <div className="flex flex-col gap-4 pb-4 border-b-2 border-border">
           <div className="flex justify-between items-end">
             <div className="flex gap-0.5 items-center">

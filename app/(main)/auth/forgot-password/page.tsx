@@ -7,7 +7,7 @@ import React from "react";
 
 const ForgotPasswordPage = () => {
   return (
-    <div className="small-block">
+    <div className="small-block p-4">
       <div className="form-block text-center justify-center">
         <div className="flex gap-1 flex-col">
           <span className="text-2xl font-bold">Reset Password</span>

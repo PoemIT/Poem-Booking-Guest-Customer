@@ -94,7 +94,7 @@ export const LoyaltyBlock = () => {
           <PointsRedeemCard />
           <PointsRedeemCard />
 
-          <div className="border-2 rounded-xl bg-primary/20 items-center justify-center border-dashed border-primary p-6 flex flex-col gap-4">
+          {/* <div className="border-2 rounded-xl bg-primary/20 items-center justify-center border-dashed border-primary p-6 flex flex-col gap-4">
             <HugeiconsIcon
               icon={Money}
               size={30}
@@ -107,7 +107,7 @@ export const LoyaltyBlock = () => {
             </p>
             <span className="text-primary my-2">500 XP</span>
             <Button className={"p-4 w-full"}>Convert Now</Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

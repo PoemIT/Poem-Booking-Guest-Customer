@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 import React from "react";
 
 export const LoginForm = () => {
@@ -41,13 +42,17 @@ export const LoginForm = () => {
               <Input type="checkbox" className="w-4 h-4" />
               Keep me signed In
             </span>
-            <span className="text-primary">Forgot Password ?</span>
+            <Link href={"/auth/forgot-password"}>
+              <Button variant={"link"}>Forgot Password ?</Button>
+            </Link>
           </div>
           <Button className={"w-full p-6 rounded-md"}>Sign In</Button>
         </div>
         <span className="text-center">
           Don't have an account ?{" "}
-          <span className="text-primary">Create Account</span>
+          <Link href={"/auth/register"}>
+            <Button variant={"link"}>Create Account</Button>
+          </Link>
         </span>
       </form>
     </div>

@@ -46,7 +46,7 @@ export const Message = () => {
     },
     {
       icon: "/icon/visa.png",
-      label: "VISA / MASTER",
+      label: "Visa / Master",
     },
   ];
   return (
@@ -102,12 +102,12 @@ export const Message = () => {
           {methods.map((method, i) => (
             <div
               key={i}
-              className="p-2 text-muted-foreground bg-white rounded-md border border-border flex gap-2 items-center"
+              className="p-2 text-muted-foreground bg-white text-[14px] rounded-md border border-border flex gap-2 items-center"
             >
               <Image
                 src={method.icon}
-                width={30}
-                height={30}
+                width={24}
+                height={24}
                 className="rounded-md"
                 alt={method.label}
               />

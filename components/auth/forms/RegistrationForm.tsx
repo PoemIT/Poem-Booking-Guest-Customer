@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 import React from "react";
 
 export const RegistrationForm = () => {
@@ -46,16 +47,21 @@ export const RegistrationForm = () => {
           <div className="flex-1 h-px bg-border" />
         </div>
         <div className="flex md:flex-row  flex-col gap-2.5 mt-4">
-          <Button className={"rounded-md flex-1 h-11"} variant={"outline"}>
+          <Button className={"rounded-md flex-1 p-3 h-11"} variant={"outline"}>
             Google
           </Button>
-          <Button className={"rounded-md h-11 flex-1"} variant={"outline"}>
+          <Button
+            className={"rounded-md h-11 shrink-0 p-3 flex-1"}
+            variant={"outline"}
+          >
             Apple
           </Button>
         </div>
         <span className="text-center">
-          Don't have an account ?{" "}
-          <span className="text-primary">Create Account</span>
+          Already have an account ?{" "}
+          <Link href={"/auth"}>
+            <Button variant={"link"}>Login</Button>
+          </Link>
         </span>
       </form>
     </div>

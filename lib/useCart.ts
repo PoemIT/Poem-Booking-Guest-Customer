@@ -29,6 +29,13 @@ interface CartState {
   totalPrice: () => number;
 }
 
+// Shared helper: unit price = base dish price + sum of addon prices
+function getUnitPrice(item: CartItem): number {
+  const addonsTotal =
+    item.adons?.reduce((sum, addon) => sum + Number(addon.price), 0) ?? 0;
+  return item.dish.price + addonsTotal;
+}
+
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
@@ -39,24 +46,18 @@ export const useCartStore = create<CartState>()(
           const existing = state.items.find((item) => item.dish.id === dish.id);
 
           if (existing) {
-            const totalAdonsPrice = existing.adons?.reduce(
-              (sum, addon) => sum + Number(addon.price),
-              0,
-            );
-
-            const MealPrice = totalAdonsPrice
-              ? existing.dish.price + totalAdonsPrice
-              : existing.dish.price;
+            const newQuantity = existing.quantity + quantity;
+            const unitPrice = getUnitPrice({ ...existing, adons });
 
             return {
               items: state.items.map((item) =>
                 item.dish.id === dish.id
                   ? {
                       ...item,
-                      adons: adons,
+                      adons,
                       specifications: specification,
-                      price: String(MealPrice * existing.quantity),
-                      quantity: item.quantity + quantity,
+                      quantity: newQuantity,
+                      price: String(unitPrice * newQuantity),
                     }
                   : item,
               ),
@@ -66,7 +67,13 @@ export const useCartStore = create<CartState>()(
           return {
             items: [
               ...state.items,
-              { dish, quantity, price, adons, specification },
+              {
+                dish,
+                quantity,
+                price,
+                adons,
+                specifications: specification,
+              },
             ],
           };
         });
@@ -80,25 +87,36 @@ export const useCartStore = create<CartState>()(
 
       increment: (dishId) => {
         set((state) => ({
-          items: state.items.map((item) =>
-            item.dish.id === dishId
-              ? {
-                  ...item,
-                  quantity: item.quantity + 1,
-                }
-              : item,
-          ),
+          items: state.items.map((item) => {
+            if (item.dish.id !== dishId) return item;
+
+            const newQuantity = item.quantity + 1;
+            const unitPrice = getUnitPrice(item);
+
+            return {
+              ...item,
+              quantity: newQuantity,
+              price: String(unitPrice * newQuantity),
+            };
+          }),
         }));
       },
 
       decrement: (dishId) => {
         set((state) => ({
           items: state.items
-            .map((item) =>
-              item.dish.id === dishId
-                ? { ...item, quantity: item.quantity - 1 }
-                : item,
-            )
+            .map((item) => {
+              if (item.dish.id !== dishId) return item;
+
+              const newQuantity = item.quantity - 1;
+              const unitPrice = getUnitPrice(item);
+
+              return {
+                ...item,
+                quantity: newQuantity,
+                price: String(unitPrice * newQuantity),
+              };
+            })
             .filter((item) => item.quantity > 0),
         }));
       },
@@ -108,9 +126,17 @@ export const useCartStore = create<CartState>()(
           items:
             quantity <= 0
               ? state.items.filter((item) => item.dish.id !== dishId)
-              : state.items.map((item) =>
-                  item.dish.id === dishId ? { ...item, quantity } : item,
-                ),
+              : state.items.map((item) => {
+                  if (item.dish.id !== dishId) return item;
+
+                  const unitPrice = getUnitPrice(item);
+
+                  return {
+                    ...item,
+                    quantity,
+                    price: String(unitPrice * quantity),
+                  };
+                }),
         }));
       },
 

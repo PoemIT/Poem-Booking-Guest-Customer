@@ -3,7 +3,7 @@ import React from "react";
 
 const LoginPage = () => {
   return (
-    <div className="mt-(--mobile-nav-height) md:py-[calc(var(--nav-height)+24px)] ">
+    <div className="mt-(--mobile-nav-height) md:mt-[calc(var(--nav-height)+24px)] ">
       <LoginForm />
     </div>
   );

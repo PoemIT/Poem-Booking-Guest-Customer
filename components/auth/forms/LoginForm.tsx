@@ -1,18 +1,57 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Loader } from "@/components/ui/Loader";
+import { useLogin } from "@/lib/public/useRegister";
+import { LoginPayload } from "@/lib/types/auth";
+import { useTokens } from "@/lib/useTokens";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { toast } from "sonner";
+
+const InitialData: LoginPayload = {
+  phoneNumber: "",
+  password: "",
+};
 
 export const LoginForm = () => {
+  const { mutate, isPending } = useLogin();
+  const [formData, setFormData] = useState<LoginPayload>(InitialData);
+  const router = useRouter();
+  const { setTokens } = useTokens();
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    mutate(formData, {
+      onSuccess: (response) => {
+        toast.success("Login successfull 🎉");
+        setTokens({
+          refreshToken: response.data.refreshToken,
+          accessToken: response.data.accessToken,
+        });
+        router.push("/account");
+      },
+      onError: (e) => {
+        toast.error(e.message ?? "There was an error login in");
+      },
+    });
+  };
+
   return (
     <div className="p-4 w-full text-[14px]">
-      <form className="form-block">
+      <form onSubmit={handleFormSubmit} className="form-block">
         <div className="text-center">
           <h1 className="text-3xl font-bold">Welcome Back</h1>
           <p className="text-muted-foreground">
             Sign in to continue your curated journey.
           </p>
-          <div className="flex flex-col gap-2.5 mt-4">
+          {/* <div className="flex flex-col gap-2.5 mt-4">
             <Button className={"rounded-md h-11"} variant={"outline"}>
               Continue with Google
             </Button>
@@ -24,18 +63,34 @@ export const LoginForm = () => {
             <div className="flex-1 h-px bg-border" />
             <span>OR</span>
             <div className="flex-1 h-px bg-border" />
-          </div>
+          </div> */}
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-1">
             <label className="text-xs text-muted-foreground">
               Phone Number
             </label>
-            <Input placeholder="Number" type="number" className="p-5 px-4" />
+            <Input
+              disabled={isPending}
+              onChange={handleInputChange}
+              value={formData.phoneNumber}
+              name="phoneNumber"
+              placeholder="Number"
+              type="number"
+              className="p-5 px-4"
+            />
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-xs text-muted-foreground">Password</label>
-            <Input placeholder="Number" type="password" className="p-5 px-4" />
+            <Input
+              disabled={isPending}
+              onChange={handleInputChange}
+              value={formData.password}
+              name="password"
+              placeholder="Number"
+              type="password"
+              className="p-5 px-4"
+            />
           </div>
           <div className="w-full flex justify-between my-4 items-center">
             <span className="flex items-center gap-2">
@@ -46,12 +101,20 @@ export const LoginForm = () => {
               <Button variant={"link"}>Forgot Password ?</Button>
             </Link>
           </div>
-          <Button className={"w-full p-6 rounded-md"}>Sign In</Button>
+          <Button
+            disabled={isPending}
+            type="submit"
+            className={"w-full p-6 rounded-md"}
+          >
+            {isPending ? <Loader /> : "Sign In"}
+          </Button>
         </div>
         <span className="text-center">
           Don't have an account ?{" "}
           <Link href={"/auth/register"}>
-            <Button variant={"link"}>Create Account</Button>
+            <Button type="button" variant={"link"}>
+              Create Account
+            </Button>
           </Link>
         </span>
       </form>

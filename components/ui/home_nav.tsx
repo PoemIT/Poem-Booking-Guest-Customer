@@ -20,6 +20,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card";
 import { formatPrice } from "@/lib/data";
 import { EmptyCart } from "../emptystuff";
 import { icon } from "leaflet";
+import { UserBlock } from "./userBlock";
 
 export const Links = [
   {
@@ -155,18 +156,7 @@ export const HomeNavbar = () => {
             </HoverCardContent>
           </HoverCard>
 
-          <Link href={"/account"}>
-            <Button
-              className={cn(
-                "text-[14px] bg-secondary-foreground hover:bg-secondary-foreground/80 text-white rounded-full p-5 px-6",
-                pathname.includes("/account")
-                  ? "bg-primary hover:bg-primary/80"
-                  : "",
-              )}
-            >
-              Account
-            </Button>
-          </Link>
+          <UserBlock />
         </div>
       </div>
     </div>

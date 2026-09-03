@@ -9,6 +9,7 @@ interface tokens {
 interface Tokens {
   tokens: tokens | null;
   setTokens: (tokens: tokens) => void;
+  deleteTokens: () => void;
 }
 
 export const useTokens = create<Tokens>()(
@@ -16,6 +17,7 @@ export const useTokens = create<Tokens>()(
     (set) => ({
       tokens: null,
       setTokens: (token: tokens) => set(() => ({ tokens: token })),
+      deleteTokens: () => set(() => ({ tokens: null })),
     }),
     {
       name: "user_tokens",

@@ -81,3 +81,10 @@ export interface ResetPasswordResponse {
   data: { message: string };
   timestamp: string;
 }
+
+export interface LogoutResponse {
+  success: boolean;
+  statusCode: number;
+  data: { message: string };
+  timestamp: string;
+}

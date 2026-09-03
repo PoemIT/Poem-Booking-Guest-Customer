@@ -6,6 +6,7 @@ import {
   ForgotPasswordResponse,
   LoginPayload,
   LoginResponse,
+  LogoutResponse,
   OTPPayload,
   OTPResendPayload,
   OTPResendResponse,
@@ -74,7 +75,7 @@ async function loginUser(payload: LoginPayload): Promise<LoginResponse> {
     if (isAxiosError<ErrorType>(e)) {
       throw new Error(e.response?.data.message ?? "Login failed");
     }
-    throw new Error("Something went wrong logging in !");
+    throw new Error("Something went wrong!");
   }
 }
 
@@ -109,6 +110,18 @@ async function resetPassword(
       throw new Error(e.message ?? "Something went wrong");
     }
     throw new Error("Something went wrong");
+  }
+}
+
+async function logoutUser(): Promise<LogoutResponse> {
+  try {
+    const { data } = await apiClient.post<LogoutResponse>("/auth/logout");
+    return data;
+  } catch (e) {
+    if (isAxiosError<ErrorType>(e)) {
+      throw new Error(e.message ?? "Failed to logout user");
+    }
+    throw new Error("Failed to logout user");
   }
 }
 
@@ -150,6 +163,13 @@ export function useLogin() {
 export function useResetPassword() {
   return useMutation<ResetPasswordResponse, Error, ResetPasswordPayload>({
     mutationFn: resetPassword,
-    mutationKey: [""],
+    mutationKey: ["reset_password"],
+  });
+}
+
+export function useLogout() {
+  return useMutation<LogoutResponse, Error, null>({
+    mutationFn: logoutUser,
+    mutationKey: ["logout_user"],
   });
 }

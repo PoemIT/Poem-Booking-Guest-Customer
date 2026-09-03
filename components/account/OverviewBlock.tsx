@@ -1,9 +1,11 @@
+"use client";
 import { Location, Pen, PlusSignCircleIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import React from "react";
 import { Button } from "../ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import Image from "next/image";
+import { useUserStore } from "@/lib/useUserStore";
 
 const HotelBookingsCard = () => {
   return (
@@ -55,6 +57,7 @@ const HotelBookingsCard = () => {
 };
 
 export const AccountOverviewBlock = () => {
+  const { user } = useUserStore();
   return (
     <section className="w-full flex flex-col gap-6">
       <div className="flex flex-col md:flex-row gap-4 justify-between md:items-end">
@@ -81,11 +84,13 @@ export const AccountOverviewBlock = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col">
               <span className="text-xs font-light">FULL NAME</span>
-              <span className="font-bold">Amadou Aboubakar</span>
+              <span className="font-bold">
+                {user?.data.firstName} {user?.data.lastName}
+              </span>
             </div>
             <div className="flex flex-col">
               <span className="text-xs font-light">EMAIL ADDRESS</span>
-              <span className="font-bold">amadou.travels@domain.cm</span>
+              <span className="font-bold">{user?.data.email}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-xs font-light">NATIONALITY</span>

@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader } from "@/components/ui/Loader";
 import { useLogin } from "@/lib/public/useRegister";
+import { authKeys } from "@/lib/query-keys/user";
 import { LoginPayload } from "@/lib/types/auth";
 import { useTokens } from "@/lib/useTokens";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -16,6 +18,7 @@ const InitialData: LoginPayload = {
 };
 
 export const LoginForm = () => {
+  const queryClient = useQueryClient();
   const { mutate, isPending } = useLogin();
   const [formData, setFormData] = useState<LoginPayload>(InitialData);
   const router = useRouter();
@@ -36,9 +39,11 @@ export const LoginForm = () => {
           accessToken: response.data.accessToken,
         });
         router.push("/account");
+        queryClient.invalidateQueries({ queryKey: authKeys.currentUser() });
       },
       onError: (e) => {
         toast.error(e.message ?? "There was an error login in");
+        console.log(e);
       },
     });
   };
@@ -87,7 +92,7 @@ export const LoginForm = () => {
               onChange={handleInputChange}
               value={formData.password}
               name="password"
-              placeholder="Number"
+              placeholder="Password"
               type="password"
               className="p-5 px-4"
             />

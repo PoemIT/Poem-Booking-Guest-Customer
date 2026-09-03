@@ -19,10 +19,10 @@ interface HotelsFiltes {
 }
 export const HotelsFilters = () => {
   const priceRanges = [
-    "under-100000",
+    "Under-100000",
     "100000-150000",
     "150000-250000",
-    "over-250000",
+    "Over-250000",
   ];
   const ratings = ["4.5", "4", "3.5"];
   const [filter, setFilter] = useState<HotelsFiltes>({

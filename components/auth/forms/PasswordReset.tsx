@@ -14,7 +14,7 @@ import {
 import { Lock } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader } from "@/components/ui/Loader";
@@ -125,5 +125,13 @@ export const ResetPasswordForm = () => {
         </div> */}
       </div>
     </form>
+  );
+};
+
+export const ResetPasswordBlock = () => {
+  return (
+    <Suspense>
+      <ResetPasswordForm />
+    </Suspense>
   );
 };

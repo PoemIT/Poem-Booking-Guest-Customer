@@ -1,5 +1,5 @@
 import { isAxiosError } from "axios";
-import { apiClient } from "../api";
+import { apiClient, publicClient } from "../api";
 import { CitiesResponse } from "../types/cities&amenities";
 import { useQuery } from "@tanstack/react-query";
 import { cityKeys } from "../query-keys/user";
@@ -7,7 +7,7 @@ import { ErrorType } from "../defined_types";
 
 async function getCities(): Promise<CitiesResponse> {
   try {
-    const { data } = await apiClient.get<CitiesResponse>("/cities");
+    const { data } = await publicClient.get<CitiesResponse>("/cities");
     return data;
   } catch (e) {
     if (isAxiosError<ErrorType>(e)) {
@@ -19,7 +19,7 @@ async function getCities(): Promise<CitiesResponse> {
 
 async function getHotelAmenities() {
   try {
-    const { data } = await apiClient.get("/hotels/amenities");
+    const { data } = await publicClient.get("/hotels/amenities");
     return data;
   } catch (e) {
     throw new Error("Something went wrong");
@@ -28,7 +28,7 @@ async function getHotelAmenities() {
 
 async function getApartmentAmenities() {
   try {
-    const { data } = await apiClient.get("/apartments/amenities");
+    const { data } = await publicClient.get("/apartments/amenities");
     return data;
   } catch (e) {
     throw new Error("Something went wrong");

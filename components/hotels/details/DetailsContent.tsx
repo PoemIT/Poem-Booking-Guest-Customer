@@ -40,6 +40,7 @@ import React, { useRef, useState } from "react";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import { EmptyHotelsRooms } from "@/components/emptystuff";
+import { HotelDetail } from "@/lib/types/hotels";
 
 const amenityIcons: Record<string, IconSvgObject> = {
   wifi: Wifi01FreeIcons,
@@ -164,7 +165,7 @@ export const DetailsContent = ({
   hotel,
   isLoading,
 }: {
-  hotel: Hotel;
+  hotel?: HotelDetail;
   isLoading: boolean;
 }) => {
   const policies = [
@@ -172,8 +173,9 @@ export const DetailsContent = ({
     "Children: Free stay for children under 12 using existing bedding.",
     "Pets: Service animals only.",
   ];
-  const [rooms, setRooms] = useState<RoomType[]>(hotel.rooms);
+  // const [rooms, setRooms] = useState<RoomType[]>(hotel.rooms);
   const [myroomtype, setType] = useState("");
+  console.log({ detail: hotel });
   const [roomFilters, setRoomFilters] = useState<RoomsFilter>({
     guests: "",
     checkIn: "",
@@ -191,54 +193,54 @@ export const DetailsContent = ({
     setRoomFilters((prev) => ({ ...prev, [key]: value }));
   };
 
-  const checkAvailability = () => {
-    const available = hotel.rooms.filter(
-      (r) =>
-        (!roomFilters.roomtype || r.type === roomFilters.roomtype) &&
-        (!roomFilters.guests || r.capacity >= Number(roomFilters.guests)) &&
-        (!roomFilters.checkIn ||
-          !roomFilters.checkout ||
-          r.availability.some(
-            (slot) =>
-              slot.checkIn === roomFilters.checkIn &&
-              slot.checkOut === roomFilters.checkout,
-          )),
-    );
+  // const checkAvailability = () => {
+  //   const available = hotel.rooms.filter(
+  //     (r) =>
+  //       (!roomFilters.roomtype || r.type === roomFilters.roomtype) &&
+  //       (!roomFilters.guests || r.capacity >= Number(roomFilters.guests)) &&
+  //       (!roomFilters.checkIn ||
+  //         !roomFilters.checkout ||
+  //         r.availability.some(
+  //           (slot) =>
+  //             slot.checkIn === roomFilters.checkIn &&
+  //             slot.checkOut === roomFilters.checkout,
+  //         )),
+  //   );
 
-    if (available.length > 0) {
-      toast.success(
-        `${available.length} Rooms are available for the selected filters`,
-      );
-      setRooms(available);
-      RoomsBlock.current?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      toast.error("No rooms are available for the selected filters");
-      setRooms([]);
-    }
-  };
+  //   if (available.length > 0) {
+  //     toast.success(
+  //       `${available.length} Rooms are available for the selected filters`,
+  //     );
+  //     setRooms(available);
+  //     RoomsBlock.current?.scrollIntoView({ behavior: "smooth" });
+  //   } else {
+  //     toast.error("No rooms are available for the selected filters");
+  //     setRooms([]);
+  //   }
+  // };
 
-  const InitiateCheck = () => {
-    setChecking(true);
-    setTimeout(() => {
-      checkAvailability();
-      setChecking(false);
-    }, 2000);
-  };
+  // const InitiateCheck = () => {
+  //   setChecking(true);
+  //   setTimeout(() => {
+  //     checkAvailability();
+  //     setChecking(false);
+  //   }, 2000);
+  // };
 
   return (
-    <div className="container-x lg:mb-20 flex flex-col-reverse gap-8">
+    <div className="container-x lg:mb-20 flex md:flex-row flex-col-reverse gap-8">
       <div className="flex flex-col gap-20 flex-1">
         <div className="flex flex-col gap-4 text-[14px]">
           <h3 className="text-2xl font-bold border-b border-border pb-2">
             Hotel Details
           </h3>
-          <p>{hotel.description}</p>
+          <p>{hotel?.description}</p>
         </div>
 
         {/* Amenities section */}
         <div className="flex flex-col gap-4">
           <h3 className="text-2xl font-bold pb-2">Amenities </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {/* <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {hotel.amenities.map((amenity) => (
               <div
                 key={amenity.id}
@@ -255,13 +257,13 @@ export const DetailsContent = ({
                 </p>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* Accomodation section */}
         <div className="flex flex-col gap-4" ref={RoomsBlock}>
           <h3 className="text-2xl font-bold pb-2">Accommodation</h3>
-          <div className="flex flex-col gap-4">
+          {/* <div className="flex flex-col gap-4">
             {rooms.length > 0 ? (
               rooms.map((room, i) => (
                 <RoomAccommodationCard room={room} key={i} />
@@ -269,7 +271,7 @@ export const DetailsContent = ({
             ) : (
               <EmptyHotelsRooms />
             )}
-          </div>
+          </div> */}
         </div>
 
         {/* Guest Experience */}
@@ -278,21 +280,23 @@ export const DetailsContent = ({
             <h2 className="text-2xl font-bold pb-2">Guest Experiences</h2>
             <div className="flex gap-2 flex-row-reverse items-center w-fit md:flex-row md:items-end">
               <div className="flex flex-col gap-0.5">
-                <span className="font-bold text-xl">{hotel.rating} / 5</span>
+                <span className="font-bold text-xl">
+                  {hotel?.starRating} / 5
+                </span>
                 <span className="text-[14px] text-muted-foreground">
-                  Based on {hotel.reviewCount} reviews
+                  Based on {hotel?.reviewCount} reviews
                 </span>
               </div>
               <div className=" p-2 rounded-md size-10 bg-primary/30 text-primary text-xl flex items-center justify-center">
-                {hotel.rating}
+                {hotel?.starRating}
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {/* <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {(hotel.reviews ?? []).map((review) => (
               <ReviewsCard review={review} key={review.id} />
             ))}
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-col gap-4">
@@ -311,11 +315,11 @@ export const DetailsContent = ({
               </span>
               <div className="w-full flex mt-2 text-muted-foreground justify-between items-center border-b border-border pb-3">
                 <span>Check-In</span>
-                <span>From {hotel.checkIn}</span>
+                <span>From {hotel?.checkInTime}</span>
               </div>
               <div className="w-full flex text-muted-foreground justify-between items-center border-b border-border pb-3">
                 <span>Check-Out</span>
-                <span>Until {hotel.checkOut}</span>
+                <span>Until {hotel?.checkOutTime}</span>
               </div>
               <p className="text-[14px] italic text-destructive">
                 Express check-in available for Hilton Honors members.
@@ -351,7 +355,7 @@ export const DetailsContent = ({
               <span className="text-xs">STARTING FROM</span>
               <span>
                 <span className="text-2xl font-bold">
-                  {hotel.formattedStartingPrice}
+                  {/* {hotel.formattedStartingPrice} */}
                 </span>
                 <span className="text-xs"> /night</span>
               </span>
@@ -367,7 +371,7 @@ export const DetailsContent = ({
             className="flex flex-col gap-4 p-6"
             onSubmit={(e) => {
               e.preventDefault();
-              InitiateCheck();
+              // InitiateCheck();
             }}
           >
             <div className="flex justify-between items-center gap-6">
@@ -428,7 +432,7 @@ export const DetailsContent = ({
             </div>
             <Button
               type="button"
-              onClick={InitiateCheck}
+              // onClick={InitiateCheck}
               className={"p-6"}
               disabled={checking}
             >

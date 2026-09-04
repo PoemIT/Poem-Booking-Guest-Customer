@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
-import { apiClient } from "../api";
+import { apiClient, publicClient } from "../api";
 import {
   ForgotPasswordPayload,
   ForgotPasswordResponse,
@@ -22,7 +22,7 @@ async function registerUser(
   payload: RegistrationPayload,
 ): Promise<RegistrationResponse> {
   try {
-    const { data } = await apiClient.post<RegistrationResponse>(
+    const { data } = await publicClient.post<RegistrationResponse>(
       "/auth/register",
       payload,
     );
@@ -37,7 +37,7 @@ async function registerUser(
 
 async function otpVerification(payload: OTPPayload): Promise<OTPResponse> {
   try {
-    const { data } = await apiClient.post<OTPResponse>(
+    const { data } = await publicClient.post<OTPResponse>(
       "/auth/otp/verify",
       payload,
     );
@@ -54,7 +54,7 @@ async function otpResend(
   payload: OTPResendPayload,
 ): Promise<OTPResendResponse> {
   try {
-    const { data } = await apiClient.post("/auth/otp/resend", payload);
+    const { data } = await publicClient.post("/auth/otp/resend", payload);
     return data;
   } catch (e) {
     if (isAxiosError(e)) {
@@ -66,7 +66,7 @@ async function otpResend(
 
 async function loginUser(payload: LoginPayload): Promise<LoginResponse> {
   try {
-    const { data } = await apiClient.post<LoginResponse>(
+    const { data } = await publicClient.post<LoginResponse>(
       "/auth/login",
       payload,
     );
@@ -83,7 +83,7 @@ async function forgotPassword(
   payload: ForgotPasswordPayload,
 ): Promise<ForgotPasswordResponse> {
   try {
-    const { data } = await apiClient.post<ForgotPasswordResponse>(
+    const { data } = await publicClient.post<ForgotPasswordResponse>(
       "/auth/forgot-password",
       payload,
     );
@@ -100,7 +100,7 @@ async function resetPassword(
   payload: ResetPasswordPayload,
 ): Promise<ResetPasswordResponse> {
   try {
-    const { data } = await apiClient.post<ResetPasswordResponse>(
+    const { data } = await publicClient.post<ResetPasswordResponse>(
       "/auth/reset-password",
       payload,
     );

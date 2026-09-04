@@ -7,7 +7,8 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { Hotel } from "@/lib/types";
+import { Hotel, HotelDetail } from "@/lib/types/hotels";
+
 import { cn } from "@/lib/utils";
 import { AlertTriangle, Location, Star } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -17,11 +18,15 @@ export const DetailsHero = ({
   hotel,
   isLoading,
 }: {
-  hotel: Hotel;
+  hotel?: HotelDetail;
   isLoading: boolean;
 }) => {
   if (isLoading) {
     return <LoadingGridHero />;
+  }
+
+  if (!hotel) {
+    return <></>;
   }
 
   return (
@@ -39,7 +44,7 @@ export const DetailsHero = ({
                       size={18}
                       className={cn(
                         "text-yellow-400  text-[14px]",
-                        i < hotel.rating ? "fill-yellow-400" : "",
+                        i < hotel.starRating ? "fill-yellow-400" : "",
                       )}
                     />
                   ))}
@@ -50,9 +55,7 @@ export const DetailsHero = ({
               </span>
               <span className="flex items-center gap-2 text-white">
                 <HugeiconsIcon icon={Location} size={18} />
-                <span>
-                  {hotel.city}, {hotel.region}
-                </span>
+                <span>{hotel.address}</span>
               </span>
             </div>
             {/* <div className="flex gap-2 text-white ">
@@ -80,7 +83,7 @@ export const DetailsHero = ({
           )}
         >
           <img
-            src={image}
+            src={image.imageUrl}
             alt={`Hotel ${index + 1}`}
             className="w-full h-full object-cover"
           />

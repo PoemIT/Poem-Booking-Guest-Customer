@@ -1,5 +1,93 @@
-export interface Hotels {
-  data: { data: []; total: number; page: number; limit: number };
+export interface HotelImage {
+  createdAt: string;
+  hotelId: string;
+  id: string;
+  imageUrl: string;
+  isPrimary: boolean;
+}
+
+export interface HotelPolicy {
+  cancellationPolicy: string;
+  checkInPolicy: string;
+  childPolicy: string;
+  createdAt: string;
+  hotelId: string;
+  id: string;
+  petPolicy: string;
+  updatedAt: string;
+}
+
+export interface RoomTypes {
+  basePrice: string;
+  createdAt: string;
+  currency: string;
+  description: string;
+  hotelId: string;
+  id: string;
+  maxAdults: number;
+  maxChildren: number;
+  name: string;
+  status: string;
+  totalRooms: number;
+  updatedAt: string;
+}
+
+export interface HotelDetail {
+  address: string;
+  avgRating: string;
+  branchId: string;
+  checkInTime: string;
+  checkOutTime: string;
+  cityId: string;
+  createdAt: string;
+  deletedAt: string;
+  description: string;
+  id: string;
+  images: HotelImage[];
+  latitude: number;
+  longitude: number;
+  name: string;
+  policy: HotelPolicy;
+  providerId: string;
+  reviewCount: string;
+  roomTypes: RoomTypes[];
+  starRating: number;
+  status: string;
+  updatedAt: string;
+}
+
+export interface HotelDetailsResponse {
+  data: HotelDetail;
+  statusCode: number;
+  success: boolean;
+  timestamp: string;
+}
+
+export interface Hotel {
+  address: string;
+  avgRating: number;
+  branchId: string;
+  checkInTime: string;
+  checkOutTime: string;
+  cityId: string;
+  createdAt: string;
+  deletedAt: string;
+  description: string;
+  id: string;
+  images: HotelImage[];
+  latitude: number;
+  longitude: number;
+  name: string;
+  providerId: string;
+  reviewCount: number;
+  starRating: number;
+  minPrice: number;
+  status: string;
+  updatedAt: string;
+}
+
+export interface HotelsResponse {
+  data: { data: Hotel[]; total: number; page: number; limit: number };
   statusCode: 200;
   success: boolean;
   timestamp: string;

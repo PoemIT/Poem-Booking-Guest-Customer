@@ -1,13 +1,13 @@
 import { isAxiosError } from "axios";
 import { ErrorType } from "../defined_types";
-import { apiClient } from "../api";
+import { apiClient, publicClient } from "../api";
 import { useQuery } from "@tanstack/react-query";
 import { hotelKeys } from "../query-keys/user";
+import { HotelDetailsResponse, HotelsResponse } from "../types/hotels";
 
-async function fetchHotels() {
+async function fetchHotels(): Promise<HotelsResponse> {
   try {
-    const { data } = await apiClient.get("/hotels");
-    console.log({ hotels: data });
+    const { data } = await publicClient.get<HotelsResponse>("/hotels");
     return data;
   } catch (e) {
     if (isAxiosError<ErrorType>(e)) {
@@ -17,9 +17,10 @@ async function fetchHotels() {
   }
 }
 
-async function fetchHotelDetails(id: string) {
+async function fetchHotelDetails(id: string): Promise<HotelDetailsResponse> {
   try {
-    const { data } = await apiClient.get(`/hotels/${id}`);
+    const { data } = await publicClient.get(`/hotels/${id}`);
+
     return data;
   } catch (e) {
     if (isAxiosError<ErrorType>(e)) {

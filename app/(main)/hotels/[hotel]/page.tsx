@@ -19,28 +19,26 @@ export default async function HotelsDetails({
   params: Promise<{ hotel: string }>;
 }) {
   const { hotel } = await params;
-  const Hotel = hotels.find((h) => h.id === hotel);
+  // const Hotel = hotels.find((h) => h.id === hotel);
 
-  if (!Hotel) {
-    return (
-      <div className="mt-[calc(var(--nav-height)+20px)]">
-        <Empty>
-          <EmptyHeader>
-            <EmptyMedia variant="icon">
-              <HugeiconsIcon icon={AlertTriangle} size={40} />
-            </EmptyMedia>
-            <EmptyTitle>Hotel not found</EmptyTitle>
-            <EmptyDescription>
-              This hotel doesn't seem to exist please try refreshing the page or
-              going back
-            </EmptyDescription>
-          </EmptyHeader>
-        </Empty>
-      </div>
-    );
-  }
+  // if (!Hotel) {
+  //   return (
+  //     <div className="mt-[calc(var(--nav-height)+20px)]">
+  //       <Empty>
+  //         <EmptyHeader>
+  //           <EmptyMedia variant="icon">
+  //             <HugeiconsIcon icon={AlertTriangle} size={40} />
+  //           </EmptyMedia>
+  //           <EmptyTitle>Hotel not found</EmptyTitle>
+  //           <EmptyDescription>
+  //             This hotel doesn't seem to exist please try refreshing the page or
+  //             going back
+  //           </EmptyDescription>
+  //         </EmptyHeader>
+  //       </Empty>
+  //     </div>
+  //   );
+  // }
 
-  return (
-    <HotelsDetailsBlock Hotel={Hotel} />
-  );
+  return <HotelsDetailsBlock id={hotel} />;
 }

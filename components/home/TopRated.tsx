@@ -1,3 +1,4 @@
+"use client";
 import { ArrowRight, Bus, Heart, Ticket } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import React from "react";
@@ -6,8 +7,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { busRoutes, hotels } from "@/lib/data";
+import { useGetHotels } from "@/lib/public/useGetHotels";
 
 export const TopRated = () => {
+  const { data } = useGetHotels();
   const routes = [
     {
       route: "Douala to Yaounde",

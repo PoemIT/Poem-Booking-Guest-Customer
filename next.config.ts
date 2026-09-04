@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "poupiempire.tech",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   /* config options here */

@@ -5,8 +5,12 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowRight } from "@hugeicons/core-free-icons";
 import { HotelCard, HotelInfoPlus } from "../ui/hotelcard";
 import { hotels } from "@/lib/data";
+import { useGetHotels, useGetHotelsDetail } from "@/lib/public/useGetHotels";
 
 export const FeaturedHotels = () => {
+  const { data } = useGetHotels();
+
+  const topRated = data?.data.data.filter((hotel) => hotel.starRating >= 4);
   return (
     <section className="flex flex-col gap-6 container-x">
       <div className="w-full flex flex-col md:flex-row gap-1 items-end justify-between">
@@ -25,10 +29,9 @@ export const FeaturedHotels = () => {
         </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {hotels.map(
-          (hotel, i) =>
-            hotel.featured && <HotelInfoPlus hotel={hotel} key={i} />,
-        )}
+        {topRated?.map((hotel, i) => (
+          <HotelInfoPlus hotel={hotel} key={i} />
+        ))}
       </div>
     </section>
   );

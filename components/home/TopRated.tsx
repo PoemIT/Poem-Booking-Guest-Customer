@@ -7,10 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { busRoutes, hotels } from "@/lib/data";
-import { useGetHotels } from "@/lib/public/useGetHotels";
+import { useGetHotels, useGetHotelsDetail } from "@/lib/public/useGetHotels";
+import { LoadingHotelCard } from "../loaders/LoadingHotelCard";
 
 export const TopRated = () => {
-  const { data } = useGetHotels();
+  const { data, isLoading } = useGetHotels();
+
+  const TopRated = data?.data.data.filter((hotel) => hotel.starRating >= 4);
   const routes = [
     {
       route: "Douala to Yaounde",
@@ -29,6 +32,17 @@ export const TopRated = () => {
     },
   ];
   const featuredHotels = hotels.filter((h) => h.featured);
+
+  if (isLoading) {
+    return (
+      <div className="grid container-x grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <LoadingHotelCard key={i} />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <section className="flex flex-col container-x gap-6">
       <div className="w-full flex justify-between items-end">
@@ -46,7 +60,7 @@ export const TopRated = () => {
       {/* // card grid */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {featuredHotels.map((hotel, i) => (
+        {TopRated?.map((hotel, i) => (
           <HotelCard hotel={hotel} key={i} />
         ))}
       </div>

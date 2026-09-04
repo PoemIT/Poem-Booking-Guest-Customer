@@ -3,11 +3,14 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
 import React from "react";
 import { Button } from "./button";
-import { Hotel } from "@/lib/types";
+// import { Hotel } from "@/lib/types";
 import { formatPrice } from "@/lib/data";
 import Link from "next/link";
+import { Hotel } from "@/lib/types/hotels";
 
 export const HotelCard = ({ hotel }: { hotel: Hotel }) => {
+  const image = hotel.images.find((i) => i.isPrimary);
+  const url = String(process.env.NEXT_PUBLIC_IMAGE_URL) + image?.imageUrl;
   return (
     <Link
       href={`/hotels/${hotel.id}`}
@@ -16,13 +19,13 @@ export const HotelCard = ({ hotel }: { hotel: Hotel }) => {
       <div className="w-full relative flex-1 overflow-hidden">
         <Image
           alt="demo Image"
-          src={hotel.image}
+          src={url ?? ""}
           width={400}
           height={400}
           className="w-full h-full object-cover"
         />
         <span className="absolute top-2 left-2 text-[12px] p-1 px-2 rounded-full bg-white/90 text-black">
-          {hotel.city}
+          {hotel.address}
         </span>
       </div>
       <div className="p-4 flex flex-col gap-2 ">
@@ -35,7 +38,7 @@ export const HotelCard = ({ hotel }: { hotel: Hotel }) => {
                 size={10}
                 className="fill-primary text-primary"
               />
-              {hotel.rating}
+              {Math.floor(Number(hotel.starRating))}
             </span>
           </span>
           <p className="text-[14px] line-clamp-1">{hotel.description}</p>
@@ -44,7 +47,7 @@ export const HotelCard = ({ hotel }: { hotel: Hotel }) => {
           <span className="flex flex-col gap-1">
             <span className="text-xs">Starts at</span>
             <span className="text-2xl font-bold">
-              {hotel.formattedStartingPrice}
+              {formatPrice(hotel.minPrice)}
             </span>
           </span>
           <HugeiconsIcon icon={ChevronRight} size={18} />
@@ -55,12 +58,15 @@ export const HotelCard = ({ hotel }: { hotel: Hotel }) => {
 };
 
 export const HotelInfoPlus = ({ hotel }: { hotel: Hotel }) => {
+  const image = hotel.images.find((i) => i.isPrimary);
+  const url =
+    String(process.env.NEXT_PUBLIC_IMAGE_URL) + (image?.imageUrl ?? "");
   return (
     <div className="border border-border rounded-xl flex overflow-hidden bg-white flex-col h-90">
       <div className="w-full relative flex-1 overflow-hidden">
         <Image
           alt="demo Image"
-          src={hotel.image}
+          src={url ?? ""}
           width={400}
           height={400}
           className="w-full h-full object-cover"
@@ -71,7 +77,7 @@ export const HotelInfoPlus = ({ hotel }: { hotel: Hotel }) => {
             size={10}
             className="fill-primary text-primary"
           />
-          {hotel.rating}
+          {hotel.starRating}
         </span>
       </div>
       <div className="p-4 flex flex-col gap-4 ">
@@ -79,7 +85,7 @@ export const HotelInfoPlus = ({ hotel }: { hotel: Hotel }) => {
           <span className="font-bold">{hotel.name}</span>
           <span className="text-xs flex gap-0.5 text-muted-foreground">
             <HugeiconsIcon icon={Location} size={16} />
-            {hotel.city}, {hotel.region}
+            {hotel.address}
           </span>
         </div>
         <div className="flex flex-col gap-0.5">
@@ -88,8 +94,7 @@ export const HotelInfoPlus = ({ hotel }: { hotel: Hotel }) => {
           </span>
           <span className="text-xs flex items-end gap-0.5 text-muted-foreground">
             <span className="text-2xl font-bold text-black">
-              {hotel.formattedStartingPrice ??
-                formatPrice(hotel.startingPrice, hotel.currency)}
+              {formatPrice(hotel.minPrice)}
             </span>
             / night
           </span>

@@ -1,3 +1,4 @@
+import { EmptyHotelsRooms } from "@/components/emptystuff";
 import { LoadingHotelCard } from "@/components/loaders/LoadingHotelCard";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,7 +9,7 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty";
 import { HotelCard, HotelInfoPlus } from "@/components/ui/hotelcard";
-import { Hotel } from "@/lib/types";
+import { Hotel } from "@/lib/types/hotels";
 import {
   AlertTriangle,
   ArrowLeft,
@@ -20,10 +21,19 @@ import React from "react";
 export const HotelsGrid = ({
   hotels,
   isLoading,
+  isError,
 }: {
   isLoading: boolean;
-  hotels: Hotel[];
+  isError: boolean;
+  hotels: Hotel[] | undefined;
 }) => {
+  if (isError) {
+    return <EmptyHotelsRooms />;
+  }
+  if (!hotels) {
+    return;
+  }
+
   return (
     <div className="flex flex-col gap-6 items-center justify-center">
       {isLoading ? (

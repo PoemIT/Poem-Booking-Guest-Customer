@@ -14,6 +14,8 @@ import { regions } from "@/lib/data";
 import { DatePickerDemo } from "../ui/date-picker";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { useGetCities } from "@/lib/public/useCitiesAmeneties";
+import { Skeleton } from "../ui/skeleton";
 
 interface BusFilter {
   origin: string;
@@ -27,11 +29,19 @@ export const BusFilter = () => {
     destination: "",
     departure: "",
   });
+  const { data, isLoading: citiesLoading } = useGetCities();
+  const cities = data?.data.map((data) => ({
+    value: data.id,
+    label: data.name,
+  }));
+  console.log({ cities: cities });
+
   const pathname = usePathname();
 
   const UpdateFilter = (key: keyof BusFilter, value: string) => {
     setFilter((prev) => ({ ...prev, [key]: value }));
   };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-end gap-4">
       <div className="flex flex-col gap-1">
@@ -39,22 +49,27 @@ export const BusFilter = () => {
           <HugeiconsIcon icon={Location} size={12} />
           Origin
         </span>
-        <Combobox
-          onInputValueChange={(val) => UpdateFilter("origin", val)}
-          items={regions}
-        >
-          <ComboboxInput className={"h-10"} placeholder="Select an Origin" />
-          <ComboboxContent>
-            <ComboboxEmpty>No items found.</ComboboxEmpty>
-            <ComboboxList>
-              {(item) => (
-                <ComboboxItem key={item} value={item}>
-                  {item}
-                </ComboboxItem>
-              )}
-            </ComboboxList>
-          </ComboboxContent>
-        </Combobox>
+        {citiesLoading ? (
+          <Skeleton className="h-9 w-full" />
+        ) : (
+          <Combobox
+            disabled={citiesLoading}
+            onInputValueChange={(val) => UpdateFilter("origin", val)}
+            items={cities}
+          >
+            <ComboboxInput className={"h-10"} placeholder="Select an Origin" />
+            <ComboboxContent>
+              <ComboboxEmpty>No items found.</ComboboxEmpty>
+              <ComboboxList>
+                {(item) => (
+                  <ComboboxItem key={item.value} value={item}>
+                    {item.label}
+                  </ComboboxItem>
+                )}
+              </ComboboxList>
+            </ComboboxContent>
+          </Combobox>
+        )}
       </div>
       <div className="flex flex-col gap-1">
         <span className="font-bold flex gap-1 items-center">

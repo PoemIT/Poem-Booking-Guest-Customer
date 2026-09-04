@@ -9,7 +9,7 @@ import { Skeleton } from "./skeleton";
 import { Avatar, AvatarFallback } from "./avatar";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./hover-card";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Logout01FreeIcons } from "@hugeicons/core-free-icons";
+import { Logout01FreeIcons, User } from "@hugeicons/core-free-icons";
 import { LogoutDialog } from "../auth/forms/LogoutBlock";
 
 export const UserBlock = () => {
@@ -67,7 +67,7 @@ export const UserBlock = () => {
         </div>
       </HoverCardTrigger>
       <HoverCardContent className={"z-90"}>
-        <div className="flex text-xs gap-1 items-center p-1 rounded-full">
+        <div className="flex text-xs gap-1 pb-4 items-center p-1 rounded-full">
           <Avatar>
             <AvatarFallback className={"uppercase"}>
               {data.data.firstName[0]}
@@ -87,6 +87,16 @@ export const UserBlock = () => {
             </span>
           </div>
         </div>
+        <Link href={"/account"} className="mt-2 w-full">
+          <Button
+            className={
+              "h-9 w-full bg-secondary-foreground hover:bg-secondary-foreground/90"
+            }
+          >
+            <HugeiconsIcon icon={User} />
+            Account
+          </Button>
+        </Link>
         <LogoutDialog />
       </HoverCardContent>
     </HoverCard>

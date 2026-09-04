@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
+import Cookies from "js-cookie";
 
 const InitialData: LoginPayload = {
   phoneNumber: "",
@@ -38,6 +39,18 @@ export const LoginForm = () => {
           refreshToken: response.data.refreshToken,
           accessToken: response.data.accessToken,
         });
+        Cookies.set(
+          "token",
+          JSON.stringify({
+            refreshToken: response.data.refreshToken,
+            accessToken: response.data.accessToken,
+          }),
+          {
+            secure: true,
+            expires: 7,
+            sameSite: "strict",
+          },
+        );
         router.push("/account");
         queryClient.invalidateQueries({ queryKey: authKeys.currentUser() });
       },

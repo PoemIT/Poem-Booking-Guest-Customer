@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { useUserStore } from "@/lib/useUserStore";
 import { useTokens } from "@/lib/useTokens";
 import { Loader } from "@/components/ui/Loader";
+import Cookies from "js-cookie";
 
 export function LogoutDialog() {
   const { mutate, isPending } = useLogout();
@@ -56,6 +57,7 @@ export function LogoutDialog() {
                   toast.success(response.data.message);
                   deleteUser();
                   deleteTokens();
+                  Cookies.remove("token");
                   window.location.replace("/");
                 },
                 onError: (e) => {

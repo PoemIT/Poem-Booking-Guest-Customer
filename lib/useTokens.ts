@@ -1,7 +1,7 @@
 import { persist } from "zustand/middleware";
 import { create } from "zustand";
 
-interface tokens {
+export interface tokens {
   accessToken: string;
   refreshToken: string;
 }

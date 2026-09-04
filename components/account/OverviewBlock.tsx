@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import Image from "next/image";
 import { useUserStore } from "@/lib/useUserStore";
+import { useGetUserData } from "@/lib/bearer/useUser";
 
 const HotelBookingsCard = () => {
   return (
@@ -58,11 +59,14 @@ const HotelBookingsCard = () => {
 
 export const AccountOverviewBlock = () => {
   const { user } = useUserStore();
+  const { data } = useGetUserData();
   return (
     <section className="w-full flex flex-col gap-6">
       <div className="flex flex-col md:flex-row gap-4 justify-between md:items-end">
         <div className="flex flex-col gap-1">
-          <h1 className="md:text-4xl text-2xl font-bold">Hello, Amadou.</h1>
+          <h1 className="md:text-4xl text-2xl font-bold">
+            Hello, {data?.data.firstName}
+          </h1>
           <p className="text-muted-foreground text-[14px]">
             Welcome back to your Poem Booking portal.
           </p>
@@ -85,12 +89,12 @@ export const AccountOverviewBlock = () => {
             <div className="flex flex-col">
               <span className="text-xs font-light">FULL NAME</span>
               <span className="font-bold">
-                {user?.data.firstName} {user?.data.lastName}
+                {data?.data.firstName} {data?.data.lastName}
               </span>
             </div>
             <div className="flex flex-col">
               <span className="text-xs font-light">EMAIL ADDRESS</span>
-              <span className="font-bold">{user?.data.email}</span>
+              <span className="font-bold">{data?.data.email}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-xs font-light">NATIONALITY</span>
@@ -98,11 +102,11 @@ export const AccountOverviewBlock = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-xs font-light">PHONE NUMBER</span>
-              <span className="font-bold">677 889 001</span>
+              <span className="font-bold">{data?.data.phoneNumber}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-xs font-light">PREF. LANGUAGE</span>
-              <span className="font-bold">French (FR)</span>
+              <span className="font-bold">{data?.data.preferredLanguage}</span>
             </div>
           </div>
         </div>
